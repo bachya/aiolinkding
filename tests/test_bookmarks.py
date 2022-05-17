@@ -32,7 +32,7 @@ async def test_client_creation(aresponses, bookmarks_async_all_response):
 
     async with aiohttp.ClientSession() as session:
         client = Client(TEST_URL, TEST_TOKEN, session=session)
-        bookmarks = await client.bookmarks.async_all()
+        bookmarks = await client.bookmarks.async_all(limit=100)
         assert bookmarks == bookmarks_async_all_response
 
 
