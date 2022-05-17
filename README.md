@@ -10,9 +10,14 @@
 
 DESCRIPTION
 
-- [Installation](#installation)
+ [Installation](#installation)
 - [Python Versions](#python-versions)
 - [Usage](#usage)
+  * [Creating a Client](#creating-a-client)
+  * [Working with Bookmarks](#working-with-bookmarks)
+    + [Getting All Bookmarks](#getting-all-bookmarks)
+    + [Getting Archived Bookmarks](#getting-archived-bookmarks)
+  * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
 # Installation
@@ -82,6 +87,34 @@ asyncio.run(main())
 ```
 
 `client.bookmarks.async_all()` takes three optional parameters:
+
+* `query`: a string query to filter the returned bookmarks
+* `limit`: the maximum number of results that should be returned
+* `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
+
+### Getting Archived Bookmarks
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Get all bookmarks:
+    bookmarks = await client.bookmarks.async_archived()
+    # >>> { "count": 100, "next": null, "previous": null, "results": [...] }
+
+
+asyncio.run(main())
+```
+
+`client.bookmarks.async_archived()` takes three optional parameters:
 
 * `query`: a string query to filter the returned bookmarks
 * `limit`: the maximum number of results that should be returned

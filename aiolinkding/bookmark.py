@@ -14,9 +14,10 @@ class BookmarkManager:
         """Initialize."""
         self._async_request = async_request
 
-    async def async_all(
+    async def _async_get_bookmarks(
         self,
         *,
+        archived: bool = False,
         query: str | None = None,
         limit: int | None = None,
         offset: int | None = None,
@@ -30,5 +31,32 @@ class BookmarkManager:
         ):
             if kwarg:
                 params[param_name] = kwarg
-        data = await self._async_request("get", "/api/bookmarks/")
+
+        endpoint = "/api/bookmarks/"
+        if archived:
+            endpoint += "archived/"
+
+        data = await self._async_request("get", endpoint)
         return cast(Dict[str, Any], data)
+
+    async def async_all(
+        self,
+        *,
+        query: str | None = None,
+        limit: int | None = None,
+        offset: int | None = None,
+    ) -> dict[str, Any]:
+        """Return all bookmarks."""
+        return await self._async_get_bookmarks(query=query, limit=limit, offset=offset)
+
+    async def async_archived(
+        self,
+        *,
+        query: str | None = None,
+        limit: int | None = None,
+        offset: int | None = None,
+    ) -> dict[str, Any]:
+        """Return all archived bookmarks."""
+        return await self._async_get_bookmarks(
+            archived=True, query=query, limit=limit, offset=offset
+        )
