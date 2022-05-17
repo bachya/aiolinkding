@@ -54,7 +54,7 @@ class Client:
         except ClientResponseError as err:
             if err.status == 401:
                 raise InvalidTokenError("Invalid API token") from err
-            raise RequestError(data["detail"]) from err
+            raise RequestError(f"Error while requesting {endpoint}: {data}") from err
         finally:
             if not use_running_session:
                 await session.close()
