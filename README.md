@@ -5,7 +5,7 @@
 [![Version](https://img.shields.io/pypi/pyversions/aiolinkding.svg)](https://pypi.python.org/pypi/aiolinkding)
 [![License](https://img.shields.io/pypi/l/aiolinkding.svg)](https://github.com/bachya/aiolinkding/blob/master/LICENSE)
 [![Code Coverage](https://codecov.io/gh/bachya/aiolinkding/branch/master/graph/badge.svg)](https://codecov.io/gh/bachya/aiolinkding)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a03c9e96f19a3dc37f98/maintainability)](https://codeclimate.com/github/bachya/aiolinkding/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/189379773edd4035a612/maintainability)](https://codeclimate.com/github/bachya/aiolinkding/maintainability)
 [![Say Thanks](https://img.shields.io/badge/SayThanks-!-1EAEDB.svg)](https://saythanks.io/to/bachya)
 
 DESCRIPTION
@@ -30,6 +30,80 @@ pip install aiolinkding
 * Python 3.10
 
 # Usage
+
+## Creating a Client
+
+It's easy to create an API client for a linkding instance. All you need are two
+parameters:
+
+1. A URL to a linkding instance
+2. A linkding API token
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Create the aiohttp session and run the example."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+
+asyncio.run(main())
+```
+
+## Working with Bookmarks
+
+The `Client` object provides easy access to several bookmark-related API operations:
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Create the aiohttp session and run the example."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Get all bookmarks:
+    bookmarks = await client.bookmarks.async_all()
+    # >>> { "count": 5, "next": null, "previous": null, "results": [...] }
+
+
+asyncio.run(main())
+```
+
+By default, the library creates a new connection to linkding with each coroutine. If you
+are calling a large number of coroutines (or merely want to squeeze out every second of
+runtime savings possible), an
+[`aiohttp`](https://github.com/aio-libs/aiohttp) `ClientSession` can be used for connection
+pooling:
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+
+from aionotion import async_get_client
+
+
+async def main() -> None:
+    """Create the aiohttp session and run the example."""
+    async with ClientSession() as session:
+        # Create a Notion API client:
+        client = Client("http://127.0.0.1:8000", "token_abcde12345", session=session)
+
+        # Get to work...
+
+
+asyncio.run(main())
+```
 
 # Contributing
 
