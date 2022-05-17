@@ -28,7 +28,7 @@ class Client:
 
     async def async_request(
         self, method: str, endpoint: str, **kwargs: dict[str, Any]
-    ) -> dict[str, Any] | list[dict[str, Any]]:
+    ) -> dict[str, Any]:
         """Make an API request."""
         kwargs.setdefault("headers", {})
         kwargs["headers"]["Authorization"] = f"Token {self._token}"
@@ -43,7 +43,7 @@ class Client:
 
         assert session
 
-        data: dict[str, Any] | list[dict[str, Any]] = {}
+        data: dict[str, Any] = {}
 
         try:
             async with session.request(

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from collections.abc import Awaitable
-from typing import Any, Callable
+from typing import Any, Callable, Dict, cast
 
 
 class BookmarkManager:
@@ -14,4 +14,5 @@ class BookmarkManager:
 
     async def async_all(self) -> dict[str, Any]:
         """Return all bookmarks."""
-        return await self._async_request("get", "/api/bookmarks/")
+        data = await self._async_request("get", "/api/bookmarks/")
+        return cast(Dict[str, Any], data)
