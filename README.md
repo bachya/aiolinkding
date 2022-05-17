@@ -17,6 +17,7 @@ DESCRIPTION
   * [Working with Bookmarks](#working-with-bookmarks)
     + [Getting All Bookmarks](#getting-all-bookmarks)
     + [Getting Archived Bookmarks](#getting-archived-bookmarks)
+    + [Getting a Single Bookmark](#getting-a-single-bookmark)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -119,6 +120,28 @@ asyncio.run(main())
 * `query`: a string query to filter the returned bookmarks
 * `limit`: the maximum number of results that should be returned
 * `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
+
+### Getting a Single Bookmark by ID
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Get all bookmarks:
+    bookmarks = await client.bookmarks.async_get(37)
+    # >>> { "id": 1, "url": "https://example.com", "title": "Example title", ... }
+
+
+asyncio.run(main())
+```
 
 ## Connection Pooling
 
