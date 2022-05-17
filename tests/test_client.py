@@ -37,13 +37,14 @@ async def test_request_error(aresponses):
         "/api/whatever/",
         "get",
         aresponses.Response(
-            text=load_fixture("invalid_response.json"),
+            text=load_fixture("missing_field_response.json"),
             status=400,
             headers={"Content-Type": "application/json"},
         ),
     )
 
     async with aiohttp.ClientSession() as session:
-        with pytest.raises(RequestError):
+        with pytest.raises(RequestError) as err:
             client = Client(TEST_URL, TEST_TOKEN, session=session)
             await client.async_request("get", "/api/whatever/")
+        assert "This field is required" in str(err)

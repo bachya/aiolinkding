@@ -1,4 +1,4 @@
-# 🚰 aiolinkding: DESCRIPTION
+# 🔖 aiolinkding: DESCRIPTION
 
 [![CI](https://github.com/bachya/aiolinkding/workflows/CI/badge.svg)](https://github.com/bachya/aiolinkding/actions)
 [![PyPi](https://img.shields.io/pypi/v/aiolinkding.svg)](https://pypi.python.org/pypi/aiolinkding)
@@ -10,7 +10,7 @@
 
 `aiolinkding` is a Python3, async library that interfaces with
 [linkding](https://github.com/sissbruecker/linkding) instances. It is intended to be a
-fairly light wrapper around the linkding API (meaning that instead of drowning the user
+reasonably light wrapper around the linkding API (meaning that instead of drowning the user
 in custom objects/etc., it focuses on returning JSON straight from the API).
 
  [Installation](#installation)
@@ -22,6 +22,7 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
     + [Getting Archived Bookmarks](#getting-archived-bookmarks)
     + [Getting a Single Bookmark](#getting-a-single-bookmark-by-id)
     + [Creating a New Bookmark](#creating-a-new-bookmark)
+    + [Updating an Existing Bookmark by ID](#updating-an-existing-bookmark-by-id)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -111,7 +112,7 @@ async def main() -> None:
     """Use aiolinkding for fun and profit."""
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
-    # Get all bookmarks:
+    # Get all archived bookmarks:
     bookmarks = await client.bookmarks.async_get_archived()
     # >>> { "count": 100, "next": null, "previous": null, "results": [...] }
 
@@ -139,7 +140,7 @@ async def main() -> None:
     """Use aiolinkding for fun and profit."""
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
-    # Get all bookmarks:
+    # Get a single bookmark:
     bookmarks = await client.bookmarks.async_get_single(37)
     # >>> { "id": 37, "url": "https://example.com", "title": "Example title", ... }
 
@@ -161,7 +162,7 @@ async def main() -> None:
     """Use aiolinkding for fun and profit."""
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
-    # Get all bookmarks:
+    # Create a new bookmark:
     created_bookmark = await client.bookmarks.async_create(
         "https://example.com",
         title="Example title",
@@ -179,6 +180,45 @@ asyncio.run(main())
 
 `client.bookmarks.async_create()` takes three optional parameters:
 
+* `title`: the bookmark's title
+* `description`: the bookmark's description
+* `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
+
+### Updating an Existing Bookmark by ID
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Update an existing bookmark:
+    updated_bookmark = await client.bookmarks.async_update(
+        37,
+        url="https://different-example.com",
+        title="Different example title",
+        description="Different example description",
+        tag_names=[
+            "tag1",
+            "tag2",
+        ],
+    )
+    # >>> { "id": 37, "url": "https://different-example.com", ... }
+
+
+asyncio.run(main())
+```
+
+`client.bookmarks.async_update()` takes four optional parameters (inclusion of any parameter
+will change that value for the existing bookmark):
+
+* `url`: the bookmark's URL
 * `title`: the bookmark's title
 * `description`: the bookmark's description
 * `tag_names`: the tags to assign to the bookmark (represented as a list of strings)

@@ -37,6 +37,36 @@ class BookmarkManager:
         data = await self._async_request("get", endpoint)
         return cast(Dict[str, Any], data)
 
+    async def _async_create_or_update_bookmark(
+        self,
+        *,
+        url: str | None = None,
+        title: str | None = None,
+        description: str | None = None,
+        tag_names: list[str] | None = None,
+        bookmark_id: int | None = None,
+    ) -> dict[str, Any]:
+        """Create or update a bookmark."""
+        payload: dict[str, str | list] = {}
+        for kwarg, param_name in (
+            (url, "url"),
+            (title, "title"),
+            (description, "description"),
+            (tag_names, "tag_names"),
+        ):
+            if kwarg:
+                payload[param_name] = kwarg
+
+        if bookmark_id:
+            method = "put"
+            url = f"/api/bookmarks/{bookmark_id}/"
+        else:
+            method = "post"
+            url = "/api/bookmarks/"
+
+        data = await self._async_request(method, url, json=payload)
+        return cast(Dict[str, Any], data)
+
     async def async_get_all(
         self,
         *,
@@ -68,18 +98,29 @@ class BookmarkManager:
         tag_names: list[str] | None = None,
     ) -> dict[str, Any]:
         """Create a new bookmark."""
-        payload: dict[str, str | list] = {"url": url}
-        for kwarg, param_name in (
-            (title, "title"),
-            (description, "description"),
-            (tag_names, "tag_names"),
-        ):
-            if kwarg:
-                payload[param_name] = kwarg
-        data = await self._async_request("post", "/api/bookmarks/", json=payload)
-        return cast(Dict[str, Any], data)
+        return await self._async_create_or_update_bookmark(
+            url=url, title=title, description=description, tag_names=tag_names
+        )
 
     async def async_get_single(self, bookmark_id: int) -> dict[str, Any]:
         """Return a single bookmark by its ID."""
         data = await self._async_request("get", f"/api/bookmarks/{bookmark_id}/")
         return cast(Dict[str, Any], data)
+
+    async def async_update(
+        self,
+        bookmark_id: int,
+        *,
+        url: str | None = None,
+        title: str | None = None,
+        description: str | None = None,
+        tag_names: list[str] | None = None,
+    ) -> dict[str, Any]:
+        """Update a bookmark by ID."""
+        return await self._async_create_or_update_bookmark(
+            url=url,
+            title=title,
+            description=description,
+            tag_names=tag_names,
+            bookmark_id=bookmark_id,
+        )
