@@ -48,7 +48,7 @@ from aiolinkding import Client
 
 
 async def main() -> None:
-    """Create the aiohttp session and run the example."""
+    """Use aiolinkding for fun and profit."""
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
 
@@ -68,7 +68,7 @@ from aiolinkding import Client
 
 
 async def main() -> None:
-    """Create the aiohttp session and run the example."""
+    """Use aiolinkding for fun and profit."""
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get all bookmarks:
@@ -94,7 +94,7 @@ from aiolinkding import Client
 
 
 async def main() -> None:
-    """Create the aiohttp session and run the example."""
+    """Use aiolinkding for fun and profit."""
     async with ClientSession() as session:
         # Create a Notion API client:
         client = Client("http://127.0.0.1:8000", "token_abcde12345", session=session)
