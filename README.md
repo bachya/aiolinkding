@@ -8,7 +8,10 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/189379773edd4035a612/maintainability)](https://codeclimate.com/github/bachya/aiolinkding/maintainability)
 [![Say Thanks](https://img.shields.io/badge/SayThanks-!-1EAEDB.svg)](https://saythanks.io/to/bachya)
 
-DESCRIPTION
+`aiolinkding` is a Python3, async library that interfaces with
+[linkding](https://github.com/sissbruecker/linkding) instances. It is intended to be a
+fairly light wrapper around the linkding API (meaning that instead of drowning the user
+in custom objects/etc., it focuses on returning JSON straight from the API).
 
  [Installation](#installation)
 - [Python Versions](#python-versions)
