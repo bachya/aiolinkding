@@ -57,7 +57,9 @@ asyncio.run(main())
 
 ## Working with Bookmarks
 
-The `Client` object provides easy access to several bookmark-related API operations:
+The `Client` object provides easy access to several bookmark-related API operations.
+
+### Getting All Bookmarks
 
 ```python
 import asyncio
@@ -73,11 +75,19 @@ async def main() -> None:
 
     # Get all bookmarks:
     bookmarks = await client.bookmarks.async_all()
-    # >>> { "count": 5, "next": null, "previous": null, "results": [...] }
+    # >>> { "count": 100, "next": null, "previous": null, "results": [...] }
 
 
 asyncio.run(main())
 ```
+
+`client.bookmarks.async_all()` takes three optional parameters:
+
+* `query`: a string query to filter the returned bookmarks
+* `limit`: the maximum number of results that should be returned
+* `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
+
+## Connection Pooling
 
 By default, the library creates a new connection to linkding with each coroutine. If you
 are calling a large number of coroutines (or merely want to squeeze out every second of
@@ -96,7 +106,6 @@ from aiolinkding import Client
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
     async with ClientSession() as session:
-        # Create a Notion API client:
         client = Client("http://127.0.0.1:8000", "token_abcde12345", session=session)
 
         # Get to work...
