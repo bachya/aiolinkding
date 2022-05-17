@@ -137,7 +137,7 @@ async def main() -> None:
 
     # Get all bookmarks:
     bookmarks = await client.bookmarks.async_get(37)
-    # >>> { "id": 1, "url": "https://example.com", "title": "Example title", ... }
+    # >>> { "id": 37, "url": "https://example.com", "title": "Example title", ... }
 
 
 asyncio.run(main())
