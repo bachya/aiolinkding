@@ -9,8 +9,8 @@ from aiolinkding.errors import LinkDingError
 
 _LOGGER = logging.getLogger()
 
-URL = "<URL>"
-TOKEN = "<TOKEN>"
+URL = "<LINDKING URL>"
+TOKEN = "<LINDKING TOKEN>"
 
 
 async def main() -> None:
@@ -28,6 +28,17 @@ async def main() -> None:
 
             single_bookmark = await client.bookmarks.async_get(1)
             _LOGGER.info("Bookmark ID: %s", single_bookmark)
+
+            created_bookmark = await client.bookmarks.async_create(
+                "https://example.com",
+                title="Example title",
+                description="Example description",
+                tag_names=[
+                    "tag1",
+                    "tag2",
+                ],
+            )
+            _LOGGER.info("Created Bookmark: %s", created_bookmark)
         except LinkDingError as err:
             _LOGGER.error("There was an error: %s", err)
 
