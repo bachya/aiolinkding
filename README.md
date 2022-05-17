@@ -17,7 +17,7 @@ DESCRIPTION
   * [Working with Bookmarks](#working-with-bookmarks)
     + [Getting All Bookmarks](#getting-all-bookmarks)
     + [Getting Archived Bookmarks](#getting-archived-bookmarks)
-    + [Getting a Single Bookmark](#getting-a-single-bookmark)
+    + [Getting a Single Bookmark](#getting-a-single-bookmark-by-id)
     + [Creating a New Bookmark](#creating-a-new-bookmark)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
