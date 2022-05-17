@@ -4,8 +4,6 @@ from __future__ import annotations
 from collections.abc import Awaitable
 from typing import Any, Callable, Dict, cast
 
-DEFAULT_LIMIT = 100
-
 
 class BookmarkManager:
     """Define the API manager object."""
@@ -60,3 +58,8 @@ class BookmarkManager:
         return await self._async_get_bookmarks(
             archived=True, query=query, limit=limit, offset=offset
         )
+
+    async def async_get(self, bookmark_id: int) -> dict[str, Any]:
+        """Return a single bookmark by its ID."""
+        data = await self._async_request("get", f"/api/bookmarks/{bookmark_id}/")
+        return cast(Dict[str, Any], data)
