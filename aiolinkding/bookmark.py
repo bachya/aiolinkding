@@ -37,7 +37,7 @@ class BookmarkManager:
         data = await self._async_request("get", endpoint)
         return cast(Dict[str, Any], data)
 
-    async def async_all(
+    async def async_get_all(
         self,
         *,
         query: str | None = None,
@@ -47,7 +47,7 @@ class BookmarkManager:
         """Return all bookmarks."""
         return await self._async_get_bookmarks(query=query, limit=limit, offset=offset)
 
-    async def async_archived(
+    async def async_get_archived(
         self,
         *,
         query: str | None = None,
@@ -79,7 +79,7 @@ class BookmarkManager:
         data = await self._async_request("post", "/api/bookmarks/", json=payload)
         return cast(Dict[str, Any], data)
 
-    async def async_get(self, bookmark_id: int) -> dict[str, Any]:
+    async def async_get_single(self, bookmark_id: int) -> dict[str, Any]:
         """Return a single bookmark by its ID."""
         data = await self._async_request("get", f"/api/bookmarks/{bookmark_id}/")
         return cast(Dict[str, Any], data)
