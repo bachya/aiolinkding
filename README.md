@@ -84,14 +84,14 @@ async def main() -> None:
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get all bookmarks:
-    bookmarks = await client.bookmarks.async_all()
+    bookmarks = await client.bookmarks.async_get_all()
     # >>> { "count": 100, "next": null, "previous": null, "results": [...] }
 
 
 asyncio.run(main())
 ```
 
-`client.bookmarks.async_all()` takes three optional parameters:
+`client.bookmarks.async_get_all()` takes three optional parameters:
 
 * `query`: a string query to filter the returned bookmarks
 * `limit`: the maximum number of results that should be returned
@@ -112,14 +112,14 @@ async def main() -> None:
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get all bookmarks:
-    bookmarks = await client.bookmarks.async_archived()
+    bookmarks = await client.bookmarks.async_get_archived()
     # >>> { "count": 100, "next": null, "previous": null, "results": [...] }
 
 
 asyncio.run(main())
 ```
 
-`client.bookmarks.async_archived()` takes three optional parameters:
+`client.bookmarks.async_get_archived()` takes three optional parameters:
 
 * `query`: a string query to filter the returned bookmarks
 * `limit`: the maximum number of results that should be returned
@@ -140,7 +140,7 @@ async def main() -> None:
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get all bookmarks:
-    bookmarks = await client.bookmarks.async_get(37)
+    bookmarks = await client.bookmarks.async_get_single(37)
     # >>> { "id": 37, "url": "https://example.com", "title": "Example title", ... }
 
 
