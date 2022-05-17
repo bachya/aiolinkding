@@ -20,13 +20,13 @@ async def main() -> None:
         try:
             client = Client(URL, TOKEN, session=session)
 
-            bookmarks = await client.bookmarks.async_all()
+            bookmarks = await client.bookmarks.async_get_all()
             _LOGGER.info("Bookmarks: %s", bookmarks)
 
-            archived_bookmarks = await client.bookmarks.async_archived()
+            archived_bookmarks = await client.bookmarks.async_get_archived()
             _LOGGER.info("Archived Bookmarks: %s", archived_bookmarks)
 
-            single_bookmark = await client.bookmarks.async_get(1)
+            single_bookmark = await client.bookmarks.async_get_single(1)
             _LOGGER.info("Bookmark ID: %s", single_bookmark)
 
             created_bookmark = await client.bookmarks.async_create(
