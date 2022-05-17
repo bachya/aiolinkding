@@ -1,4 +1,4 @@
-# 🚰 aiolinkding: DESCRIPTION
+# 🔖 aiolinkding: DESCRIPTION
 
 [![CI](https://github.com/bachya/aiolinkding/workflows/CI/badge.svg)](https://github.com/bachya/aiolinkding/actions)
 [![PyPi](https://img.shields.io/pypi/v/aiolinkding.svg)](https://pypi.python.org/pypi/aiolinkding)
@@ -10,7 +10,7 @@
 
 `aiolinkding` is a Python3, async library that interfaces with
 [linkding](https://github.com/sissbruecker/linkding) instances. It is intended to be a
-fairly light wrapper around the linkding API (meaning that instead of drowning the user
+reasonably light wrapper around the linkding API (meaning that instead of drowning the user
 in custom objects/etc., it focuses on returning JSON straight from the API).
 
  [Installation](#installation)
@@ -215,7 +215,7 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-`client.bookmarks.async_update()` takes four optional parameters (inclusion of any one
+`client.bookmarks.async_update()` takes four optional parameters (inclusion of any parameter
 will change that value for the existing bookmark):
 
 * `url`: the bookmark's URL
