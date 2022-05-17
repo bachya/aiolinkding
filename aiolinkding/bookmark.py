@@ -59,6 +59,26 @@ class BookmarkManager:
             archived=True, query=query, limit=limit, offset=offset
         )
 
+    async def async_create(
+        self,
+        url: str,
+        *,
+        title: str | None = None,
+        description: str | None = None,
+        tag_names: list[str] | None = None,
+    ) -> dict[str, Any]:
+        """Create a new bookmark."""
+        payload: dict[str, str | list] = {"url": url}
+        for kwarg, param_name in (
+            (title, "title"),
+            (description, "description"),
+            (tag_names, "tag_names"),
+        ):
+            if kwarg:
+                payload[param_name] = kwarg
+        data = await self._async_request("post", "/api/bookmarks/", json=payload)
+        return cast(Dict[str, Any], data)
+
     async def async_get(self, bookmark_id: int) -> dict[str, Any]:
         """Return a single bookmark by its ID."""
         data = await self._async_request("get", f"/api/bookmarks/{bookmark_id}/")

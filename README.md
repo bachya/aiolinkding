@@ -18,6 +18,7 @@ DESCRIPTION
     + [Getting All Bookmarks](#getting-all-bookmarks)
     + [Getting Archived Bookmarks](#getting-archived-bookmarks)
     + [Getting a Single Bookmark](#getting-a-single-bookmark)
+    + [Creating a New Bookmark](#creating-a-new-bookmark)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -142,6 +143,42 @@ async def main() -> None:
 
 asyncio.run(main())
 ```
+
+### Creating a New Bookmark
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Get all bookmarks:
+    created_bookmark = await client.bookmarks.async_create(
+        "https://example.com",
+        title="Example title",
+        description="Example description",
+        tag_names=[
+            "tag1",
+            "tag2",
+        ],
+    )
+    # >>> { "id": 37, "url": "https://example.com", "title": "Example title", ... }
+
+
+asyncio.run(main())
+```
+
+`client.bookmarks.async_create()` takes three optional parameters:
+
+* `title`: the bookmark's title
+* `description`: the bookmark's description
+* `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
 
 ## Connection Pooling
 

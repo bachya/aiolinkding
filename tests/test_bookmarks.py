@@ -75,6 +75,34 @@ async def test_bookmarks_archived(aresponses, bookmarks_async_archived_response)
 
 
 @pytest.mark.asyncio
+async def test_bookmarks_create(aresponses, bookmarks_async_get_response):
+    """Test creating a single bookmark."""
+    aresponses.add(
+        "127.0.0.1:8000",
+        "/api/bookmarks/",
+        "post",
+        aresponses.Response(
+            text=json.dumps(bookmarks_async_get_response),
+            status=200,
+            headers={"Content-Type": "application/json"},
+        ),
+    )
+
+    async with aiohttp.ClientSession() as session:
+        client = Client(TEST_URL, TEST_TOKEN, session=session)
+        created_bookmark = await client.bookmarks.async_create(
+            "https://example.com",
+            title="Example title",
+            description="Example description",
+            tag_names=[
+                "tag1",
+                "tag2",
+            ],
+        )
+        assert created_bookmark == bookmarks_async_get_response
+
+
+@pytest.mark.asyncio
 async def test_bookmarks_get(aresponses, bookmarks_async_get_response):
     """Test getting a single bookmark."""
     aresponses.add(
