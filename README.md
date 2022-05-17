@@ -90,7 +90,7 @@ import asyncio
 
 from aiohttp import ClientSession
 
-from aionotion import async_get_client
+from aiolinkding import Client
 
 
 async def main() -> None:
