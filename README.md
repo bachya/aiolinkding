@@ -25,6 +25,8 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
     + [Updating an Existing Bookmark by ID](#updating-an-existing-bookmark-by-id)
     + [Archiving/Unarchiving a Bookmark](#archivingunarchiving-a-bookmark)
     + [Deleting a Bookmark](#deleting-a-bookmark)
+  * [Working with Tags](#working-with-tags)
+    + [Getting All Tags](#getting-all-Targs)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -261,6 +263,36 @@ async def main() -> None:
 
 asyncio.run(main())
 ```
+
+## Working with Tags
+
+The `Client` object also provides easy access to several tag-related API operations.
+
+### Getting All Tags
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Get all bookmarks:
+    bookmarks = await client.tags.async_get_all()
+    # >>> { "count": 100, "next": null, "previous": null, "results": [...] }
+
+
+asyncio.run(main())
+```
+
+`client.tags.async_get_all()` takes three optional parameters:
+
+* `limit`: the maximum number of results that should be returned
+* `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
 
 ## Connection Pooling
 

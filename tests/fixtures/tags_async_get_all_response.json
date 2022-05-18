@@ -1,0 +1,12 @@
+{
+  "count": 123,
+  "next": "http://127.0.0.1:8000/api/tags/?limit=100&offset=100",
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "name": "example",
+      "date_added": "2020-09-26T09:46:23.006313Z"
+    }
+  ]
+}
