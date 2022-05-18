@@ -281,8 +281,8 @@ async def main() -> None:
     """Use aiolinkding for fun and profit."""
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
-    # Get all bookmarks:
-    bookmarks = await client.tags.async_get_all()
+    # Get all tags:
+    tags = await client.tags.async_get_all()
     # >>> { "count": 100, "next": null, "previous": null, "results": [...] }
 
 
