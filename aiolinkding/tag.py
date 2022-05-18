@@ -12,6 +12,13 @@ class TagManager:
         """Initialize."""
         self._async_request = async_request
 
+    async def async_create(self, tag_name: str) -> dict[str, Any]:
+        """Create a new tag."""
+        data = await self._async_request(
+            "post", "/api/tags/", json={"example": tag_name}
+        )
+        return cast(Dict[str, Any], data)
+
     async def async_get_all(
         self,
         *,
