@@ -29,3 +29,9 @@ def bookmarks_async_get_single_response_fixture():
 def tags_async_get_all_response_fixture():
     """Define a fixture to return all tags."""
     return json.loads(load_fixture("tags_async_get_all_response.json"))
+
+
+@pytest.fixture(name="tags_async_get_single_response")
+def tags_async_get_single_response_fixture():
+    """Define a fixture to return a single tag."""
+    return json.loads(load_fixture("tags_async_get_single_response.json"))

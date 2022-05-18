@@ -27,6 +27,7 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
     + [Deleting a Bookmark](#deleting-a-bookmark)
   * [Working with Tags](#working-with-tags)
     + [Getting All Tags](#getting-all-tags)
+    + [Getting a Single Tag](#getting-a-single-tag-by-id)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -284,6 +285,27 @@ asyncio.run(main())
 
 * `limit`: the maximum number of results that should be returned
 * `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
+
+### Getting a Single Tag by ID
+
+```python
+import asyncio
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Get a single bookmark:
+    bookmarks = await client.tags.async_get_single(22)
+    # >>> { "id": 22, "name": "example-tag", ... }
+
+
+asyncio.run(main())
+```
+
 
 ## Connection Pooling
 
