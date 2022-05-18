@@ -56,7 +56,6 @@ parameters:
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -78,7 +77,6 @@ The `Client` object provides easy access to several bookmark-related API operati
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -106,7 +104,6 @@ asyncio.run(main())
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -134,7 +131,6 @@ asyncio.run(main())
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -156,7 +152,6 @@ asyncio.run(main())
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -192,7 +187,6 @@ asyncio.run(main())
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -231,7 +225,6 @@ will change that value for the existing bookmark):
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -255,7 +248,6 @@ asyncio.run(main())
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -282,7 +274,6 @@ pooling:
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
