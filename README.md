@@ -299,8 +299,8 @@ async def main() -> None:
     """Use aiolinkding for fun and profit."""
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
-    # Get a single bookmark:
-    bookmarks = await client.tags.async_get_single(22)
+    # Get a single tag:
+    tag = await client.tags.async_get_single(22)
     # >>> { "id": 22, "name": "example-tag", ... }
 
 
@@ -319,8 +319,8 @@ async def main() -> None:
     """Use aiolinkding for fun and profit."""
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
-    # Create a new bookmark:
-    created_bookmark = await client.tags.async_create("example-tag")
+    # Create a new tag:
+    created_tag = await client.tags.async_create("example-tag")
     # >>> { "id": 22, "name": "example-tag", ... }
 
 
