@@ -9,6 +9,7 @@ from aiohttp.client_exceptions import ClientResponseError
 from .bookmark import BookmarkManager
 from .const import LOGGER
 from .errors import InvalidTokenError, RequestError
+from .tag import TagManager
 
 DEFAULT_REQUEST_TIMEOUT = 10
 
@@ -25,6 +26,7 @@ class Client:
         self._url = url
 
         self.bookmarks = BookmarkManager(self.async_request)
+        self.tags = TagManager(self.async_request)
 
     async def async_request(
         self, method: str, endpoint: str, **kwargs: dict[str, Any]
