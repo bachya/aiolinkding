@@ -1,4 +1,4 @@
-# 🔖 aiolinkding: DESCRIPTION
+# 🔖 aiolinkding: a Python3, async library to the linkding REST API
 
 [![CI](https://github.com/bachya/aiolinkding/workflows/CI/badge.svg)](https://github.com/bachya/aiolinkding/actions)
 [![PyPi](https://img.shields.io/pypi/v/aiolinkding.svg)](https://pypi.python.org/pypi/aiolinkding)
@@ -23,6 +23,7 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
     + [Getting a Single Bookmark](#getting-a-single-bookmark-by-id)
     + [Creating a New Bookmark](#creating-a-new-bookmark)
     + [Updating an Existing Bookmark by ID](#updating-an-existing-bookmark-by-id)
+    + [Archiving/Unarchiving a Bookmark](#archivingunarchiving-a-bookmark)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -222,6 +223,30 @@ will change that value for the existing bookmark):
 * `title`: the bookmark's title
 * `description`: the bookmark's description
 * `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
+
+### Archiving/Unarchiving a Bookmark
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Archive a bookmark by ID:
+    await client.bookmarks.async_archive(37)
+
+    # ...and unarchive it:
+    await client.bookmarks.async_unarchive(37)
+
+
+asyncio.run(main())
+```
 
 ## Connection Pooling
 
