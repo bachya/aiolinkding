@@ -52,6 +52,10 @@ class Client:
                 data = await resp.json()
                 resp.raise_for_status()
         except ClientResponseError as err:
+            if resp.status == 204:
+                # An HTTP 204 will not return parsable JSON data, but it's still a
+                # successful response, so we swallow the exception and return:
+                return {}
             if err.status == 401:
                 raise InvalidTokenError("Invalid API token") from err
             raise RequestError(f"Error while requesting {endpoint}: {data}") from err
