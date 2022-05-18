@@ -24,6 +24,7 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
     + [Creating a New Bookmark](#creating-a-new-bookmark)
     + [Updating an Existing Bookmark by ID](#updating-an-existing-bookmark-by-id)
     + [Archiving/Unarchiving a Bookmark](#archivingunarchiving-a-bookmark)
+    + [Deleting a Bookmark](#deleting-a-bookmark)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -243,6 +244,27 @@ async def main() -> None:
 
     # ...and unarchive it:
     await client.bookmarks.async_unarchive(37)
+
+
+asyncio.run(main())
+```
+
+### Deleting a Bookmark
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Delete a bookmark by ID:
+    await client.bookmarks.async_delete(37)
 
 
 asyncio.run(main())
