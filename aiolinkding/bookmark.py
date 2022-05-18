@@ -71,6 +71,10 @@ class BookmarkManager:
         """Archive a bookmark."""
         await self._async_request("post", f"/api/bookmarks/{bookmark_id}/archive/")
 
+    async def async_delete(self, bookmark_id: int) -> None:
+        """Delete a bookmark."""
+        await self._async_request("delete", f"/api/bookmarks/{bookmark_id}/")
+
     async def async_get_all(
         self,
         *,
@@ -107,7 +111,7 @@ class BookmarkManager:
         )
 
     async def async_get_single(self, bookmark_id: int) -> dict[str, Any]:
-        """Return a single bookmark by its ID."""
+        """Return a single bookmark."""
         data = await self._async_request("get", f"/api/bookmarks/{bookmark_id}/")
         return cast(Dict[str, Any], data)
 
@@ -124,7 +128,7 @@ class BookmarkManager:
         description: str | None = None,
         tag_names: list[str] | None = None,
     ) -> dict[str, Any]:
-        """Update a bookmark by ID."""
+        """Update an existing bookmark."""
         return await self._async_create_or_update_bookmark(
             url=url,
             title=title,

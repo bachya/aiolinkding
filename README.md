@@ -24,6 +24,7 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
     + [Creating a New Bookmark](#creating-a-new-bookmark)
     + [Updating an Existing Bookmark by ID](#updating-an-existing-bookmark-by-id)
     + [Archiving/Unarchiving a Bookmark](#archivingunarchiving-a-bookmark)
+    + [Deleting a Bookmark](#deleting-a-bookmark)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -55,7 +56,6 @@ parameters:
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -77,7 +77,6 @@ The `Client` object provides easy access to several bookmark-related API operati
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -105,7 +104,6 @@ asyncio.run(main())
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -133,7 +131,6 @@ asyncio.run(main())
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -155,7 +152,6 @@ asyncio.run(main())
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -191,7 +187,6 @@ asyncio.run(main())
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -230,7 +225,6 @@ will change that value for the existing bookmark):
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
@@ -248,6 +242,26 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
+### Deleting a Bookmark
+
+```python
+import asyncio
+
+from aiohttp import ClientSession
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Delete a bookmark by ID:
+    await client.bookmarks.async_delete(37)
+
+
+asyncio.run(main())
+```
+
 ## Connection Pooling
 
 By default, the library creates a new connection to linkding with each coroutine. If you
@@ -260,7 +274,6 @@ pooling:
 import asyncio
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 
 
