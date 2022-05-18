@@ -2,7 +2,7 @@
 
 **Does this fix a specific issue?**
 
-Fixes https://github.com/bachya/package_name/issues/<ISSUE ID>
+Fixes https://github.com/bachya/aiolinkding/issues/<ISSUE ID>
 
 **Checklist:**
 
