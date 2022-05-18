@@ -282,7 +282,7 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-`client.tags.async_get_all()` takes three optional parameters:
+`client.tags.async_get_all()` takes two optional parameters:
 
 * `limit`: the maximum number of results that should be returned
 * `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
