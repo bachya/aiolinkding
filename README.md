@@ -57,7 +57,6 @@ parameters:
 ```python
 import asyncio
 
-from aiohttp import ClientSession
 from aiolinkding import Client
 
 
@@ -78,7 +77,6 @@ The `Client` object provides easy access to several bookmark-related API operati
 ```python
 import asyncio
 
-from aiohttp import ClientSession
 from aiolinkding import Client
 
 
@@ -105,7 +103,6 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiohttp import ClientSession
 from aiolinkding import Client
 
 
@@ -132,7 +129,6 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiohttp import ClientSession
 from aiolinkding import Client
 
 
@@ -153,7 +149,6 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiohttp import ClientSession
 from aiolinkding import Client
 
 
@@ -188,7 +183,6 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiohttp import ClientSession
 from aiolinkding import Client
 
 
@@ -226,7 +220,6 @@ will change that value for the existing bookmark):
 ```python
 import asyncio
 
-from aiohttp import ClientSession
 from aiolinkding import Client
 
 
@@ -249,7 +242,6 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiohttp import ClientSession
 from aiolinkding import Client
 
 
@@ -273,7 +265,6 @@ The `Client` object also provides easy access to several tag-related API operati
 ```python
 import asyncio
 
-from aiohttp import ClientSession
 from aiolinkding import Client
 
 
