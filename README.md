@@ -26,7 +26,7 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
     + [Archiving/Unarchiving a Bookmark](#archivingunarchiving-a-bookmark)
     + [Deleting a Bookmark](#deleting-a-bookmark)
   * [Working with Tags](#working-with-tags)
-    + [Getting All Tags](#getting-all-Targs)
+    + [Getting All Tags](#getting-all-tags)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
