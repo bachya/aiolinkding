@@ -23,7 +23,7 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
     + [Getting a Single Bookmark](#getting-a-single-bookmark-by-id)
     + [Creating a New Bookmark](#creating-a-new-bookmark)
     + [Updating an Existing Bookmark by ID](#updating-an-existing-bookmark-by-id)
-    + [Archiving/Unarchiving a Bookmark](#archiving-unarchiving-a-bookmark)
+    + [Archiving/Unarchiving a Bookmark](#archivingunarchiving-a-bookmark)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
