@@ -28,6 +28,7 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
   * [Working with Tags](#working-with-tags)
     + [Getting All Tags](#getting-all-tags)
     + [Getting a Single Tag](#getting-a-single-tag-by-id)
+    + [Creating a New Tag](#creating-a-new-Tag)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -306,6 +307,25 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
+### Creating a New Tag
+
+```python
+import asyncio
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Create a new bookmark:
+    created_bookmark = await client.tags.async_create("example-tag")
+    # >>> { "id": 22, "name": "example-tag", ... }
+
+
+asyncio.run(main())
+```
 
 ## Connection Pooling
 
