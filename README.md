@@ -139,7 +139,7 @@ async def main() -> None:
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get a single bookmark:
-    bookmarks = await client.bookmarks.async_get_single(37)
+    bookmark = await client.bookmarks.async_get_single(37)
     # >>> { "id": 37, "url": "https://example.com", "title": "Example title", ... }
 
 
