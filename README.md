@@ -28,6 +28,7 @@ in custom objects/etc., it focuses on returning JSON straight from the API).
   * [Working with Tags](#working-with-tags)
     + [Getting All Tags](#getting-all-tags)
     + [Getting a Single Tag](#getting-a-single-tag-by-id)
+    + [Creating a New Tag](#creating-a-new-Tag)
   * [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -138,7 +139,7 @@ async def main() -> None:
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get a single bookmark:
-    bookmarks = await client.bookmarks.async_get_single(37)
+    bookmark = await client.bookmarks.async_get_single(37)
     # >>> { "id": 37, "url": "https://example.com", "title": "Example title", ... }
 
 
@@ -281,7 +282,7 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-`client.tags.async_get_all()` takes three optional parameters:
+`client.tags.async_get_all()` takes two optional parameters:
 
 * `limit`: the maximum number of results that should be returned
 * `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
@@ -298,14 +299,33 @@ async def main() -> None:
     """Use aiolinkding for fun and profit."""
     client = Client("http://127.0.0.1:8000", "token_abcde12345")
 
-    # Get a single bookmark:
-    bookmarks = await client.tags.async_get_single(22)
+    # Get a single tag:
+    tag = await client.tags.async_get_single(22)
     # >>> { "id": 22, "name": "example-tag", ... }
 
 
 asyncio.run(main())
 ```
 
+### Creating a New Tag
+
+```python
+import asyncio
+
+from aiolinkding import Client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Create a new tag:
+    created_tag = await client.tags.async_create("example-tag")
+    # >>> { "id": 22, "name": "example-tag", ... }
+
+
+asyncio.run(main())
+```
 
 ## Connection Pooling
 

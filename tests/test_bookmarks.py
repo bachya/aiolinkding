@@ -24,6 +24,8 @@ async def test_archive(aresponses):
         client = Client(TEST_URL, TEST_TOKEN, session=session)
         await client.bookmarks.async_archive(1)
 
+    aresponses.assert_plan_strictly_followed()
+
 
 @pytest.mark.asyncio
 async def test_create(aresponses, bookmarks_async_get_single_response):
@@ -34,7 +36,7 @@ async def test_create(aresponses, bookmarks_async_get_single_response):
         "post",
         aresponses.Response(
             text=json.dumps(bookmarks_async_get_single_response),
-            status=200,
+            status=201,
             headers={"Content-Type": "application/json"},
         ),
     )
@@ -52,6 +54,8 @@ async def test_create(aresponses, bookmarks_async_get_single_response):
         )
         assert created_bookmark == bookmarks_async_get_single_response
 
+    aresponses.assert_plan_strictly_followed()
+
 
 @pytest.mark.asyncio
 async def test_delete(aresponses):
@@ -66,6 +70,8 @@ async def test_delete(aresponses):
     async with aiohttp.ClientSession() as session:
         client = Client(TEST_URL, TEST_TOKEN, session=session)
         await client.bookmarks.async_delete(1)
+
+    aresponses.assert_plan_strictly_followed()
 
 
 @pytest.mark.asyncio
@@ -87,6 +93,8 @@ async def test_get_all(aresponses, bookmarks_async_get_all_response):
         # Include limit to exercise the inclusion of request parameters:
         bookmarks = await client.bookmarks.async_get_all(limit=100)
         assert bookmarks == bookmarks_async_get_all_response
+
+    aresponses.assert_plan_strictly_followed()
 
 
 @pytest.mark.asyncio
@@ -111,6 +119,8 @@ async def test_get_all_no_explicit_session(
     bookmarks = await client.bookmarks.async_get_all()
     assert bookmarks == bookmarks_async_get_all_response
 
+    aresponses.assert_plan_strictly_followed()
+
 
 @pytest.mark.asyncio
 async def test_get_archived(aresponses, bookmarks_async_get_archived_response):
@@ -130,6 +140,8 @@ async def test_get_archived(aresponses, bookmarks_async_get_archived_response):
         client = Client(TEST_URL, TEST_TOKEN, session=session)
         archived_bookmarks = await client.bookmarks.async_get_archived()
         assert archived_bookmarks == bookmarks_async_get_archived_response
+
+    aresponses.assert_plan_strictly_followed()
 
 
 @pytest.mark.asyncio
@@ -151,6 +163,8 @@ async def test_get_single(aresponses, bookmarks_async_get_single_response):
         single_bookmark = await client.bookmarks.async_get_single(1)
         assert single_bookmark == bookmarks_async_get_single_response
 
+    aresponses.assert_plan_strictly_followed()
+
 
 @pytest.mark.asyncio
 async def test_unarchive(aresponses):
@@ -165,6 +179,8 @@ async def test_unarchive(aresponses):
     async with aiohttp.ClientSession() as session:
         client = Client(TEST_URL, TEST_TOKEN, session=session)
         await client.bookmarks.async_unarchive(1)
+
+    aresponses.assert_plan_strictly_followed()
 
 
 @pytest.mark.asyncio
@@ -194,3 +210,5 @@ async def test_update(aresponses, bookmarks_async_get_single_response):
             ],
         )
         assert updated_bookmark == bookmarks_async_get_single_response
+
+    aresponses.assert_plan_strictly_followed()

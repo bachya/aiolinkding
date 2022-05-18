@@ -28,6 +28,8 @@ async def test_invalid_token(aresponses):
             client = Client(TEST_URL, TEST_TOKEN, session=session)
             await client.async_request("get", "/api/whatever/")
 
+    aresponses.assert_plan_strictly_followed()
+
 
 @pytest.mark.asyncio
 async def test_request_error(aresponses):
@@ -48,3 +50,5 @@ async def test_request_error(aresponses):
             client = Client(TEST_URL, TEST_TOKEN, session=session)
             await client.async_request("get", "/api/whatever/")
         assert "This field is required" in str(err)
+
+    aresponses.assert_plan_strictly_followed()
