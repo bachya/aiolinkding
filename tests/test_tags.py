@@ -29,3 +29,23 @@ async def test_get_all(aresponses, tags_async_get_all_response):
         # Include limit to exercise the inclusion of request parameters:
         tags = await client.tags.async_get_all(limit=100)
         assert tags == tags_async_get_all_response
+
+
+@pytest.mark.asyncio
+async def test_get_single(aresponses, tags_async_get_single_response):
+    """Test getting a single tag."""
+    aresponses.add(
+        "127.0.0.1:8000",
+        "/api/tags/1/",
+        "get",
+        aresponses.Response(
+            text=json.dumps(tags_async_get_single_response),
+            status=200,
+            headers={"Content-Type": "application/json"},
+        ),
+    )
+
+    async with aiohttp.ClientSession() as session:
+        client = Client(TEST_URL, TEST_TOKEN, session=session)
+        single_tag = await client.tags.async_get_single(1)
+        assert single_tag == tags_async_get_single_response
