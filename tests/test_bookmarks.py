@@ -11,6 +11,21 @@ from .common import TEST_TOKEN, TEST_URL
 
 
 @pytest.mark.asyncio
+async def test_archive(aresponses):
+    """Test archiving a bookmark."""
+    aresponses.add(
+        "127.0.0.1:8000",
+        "/api/bookmarks/1/archive/",
+        "post",
+        aresponses.Response(status=204),
+    )
+
+    async with aiohttp.ClientSession() as session:
+        client = Client(TEST_URL, TEST_TOKEN, session=session)
+        await client.bookmarks.async_archive(1)
+
+
+@pytest.mark.asyncio
 async def test_create(aresponses, bookmarks_async_get_single_response):
     """Test creating a single bookmark."""
     aresponses.add(
@@ -120,6 +135,21 @@ async def test_get_single(aresponses, bookmarks_async_get_single_response):
         client = Client(TEST_URL, TEST_TOKEN, session=session)
         single_bookmark = await client.bookmarks.async_get_single(1)
         assert single_bookmark == bookmarks_async_get_single_response
+
+
+@pytest.mark.asyncio
+async def test_unarchive(aresponses):
+    """Test unarchiving a bookmark."""
+    aresponses.add(
+        "127.0.0.1:8000",
+        "/api/bookmarks/1/unarchive/",
+        "post",
+        aresponses.Response(status=204),
+    )
+
+    async with aiohttp.ClientSession() as session:
+        client = Client(TEST_URL, TEST_TOKEN, session=session)
+        await client.bookmarks.async_unarchive(1)
 
 
 @pytest.mark.asyncio
