@@ -29,3 +29,8 @@ class TagManager:
 
         data = await self._async_request("get", "/api/tags/")
         return cast(Dict[str, Any], data)
+
+    async def async_get_single(self, tag_id: int) -> dict[str, Any]:
+        """Return a single tag."""
+        data = await self._async_request("get", f"/api/tags/{tag_id}/")
+        return cast(Dict[str, Any], data)
