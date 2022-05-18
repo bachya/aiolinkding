@@ -3,7 +3,6 @@ import asyncio
 import logging
 
 from aiohttp import ClientSession
-
 from aiolinkding import Client
 from aiolinkding.errors import LinkDingError
 
