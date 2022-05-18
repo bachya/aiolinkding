@@ -1,4 +1,4 @@
-# 🔖 aiolinkding: DESCRIPTION
+# 🔖 aiolinkding: a Python3, async library to the linkding REST API
 
 [![CI](https://github.com/bachya/aiolinkding/workflows/CI/badge.svg)](https://github.com/bachya/aiolinkding/actions)
 [![PyPi](https://img.shields.io/pypi/v/aiolinkding.svg)](https://pypi.python.org/pypi/aiolinkding)
