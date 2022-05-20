@@ -37,13 +37,14 @@ async def test_get_all(aresponses, tags_async_get_all_response):
     """Test getting all tags."""
     aresponses.add(
         "127.0.0.1:8000",
-        "/api/tags/",
+        "/api/tags/?limit=100",
         "get",
         aresponses.Response(
             text=json.dumps(tags_async_get_all_response),
             status=200,
             headers={"Content-Type": "application/json"},
         ),
+        match_querystring=True,
     )
 
     async with aiohttp.ClientSession() as session:
