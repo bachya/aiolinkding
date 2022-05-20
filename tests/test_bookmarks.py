@@ -79,13 +79,14 @@ async def test_get_all(aresponses, bookmarks_async_get_all_response):
     """Test getting all bookmarks."""
     aresponses.add(
         "127.0.0.1:8000",
-        "/api/bookmarks/",
+        "/api/bookmarks/?limit=100",
         "get",
         aresponses.Response(
             text=json.dumps(bookmarks_async_get_all_response),
             status=200,
             headers={"Content-Type": "application/json"},
         ),
+        match_querystring=True,
     )
 
     async with aiohttp.ClientSession() as session:

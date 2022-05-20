@@ -34,7 +34,7 @@ class TagManager:
             if kwarg:
                 params[param_name] = kwarg
 
-        data = await self._async_request("get", "/api/tags/")
+        data = await self._async_request("get", "/api/tags/", params=params)
         return cast(Dict[str, Any], data)
 
     async def async_get_single(self, tag_id: int) -> dict[str, Any]:

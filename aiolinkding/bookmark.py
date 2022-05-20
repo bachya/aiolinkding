@@ -34,7 +34,7 @@ class BookmarkManager:
         if archived:
             endpoint += "archived/"
 
-        data = await self._async_request("get", endpoint)
+        data = await self._async_request("get", endpoint, params=params)
         return cast(Dict[str, Any], data)
 
     async def _async_create_or_update_bookmark(
