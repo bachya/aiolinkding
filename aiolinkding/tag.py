@@ -4,6 +4,8 @@ from __future__ import annotations
 from collections.abc import Awaitable
 from typing import Any, Callable, Dict, cast
 
+from aiolinkding.util import generate_api_payload
+
 
 class TagManager:
     """Define the API manager object."""
@@ -26,13 +28,12 @@ class TagManager:
         offset: int | None = None,
     ) -> dict[str, Any]:
         """Return all tags."""
-        params = {}
-        for kwarg, param_name in (
-            (limit, "limit"),
-            (offset, "offset"),
-        ):
-            if kwarg:
-                params[param_name] = kwarg
+        params = generate_api_payload(
+            (
+                ("limit", limit),
+                ("offset", offset),
+            )
+        )
 
         data = await self._async_request("get", "/api/tags/", params=params)
         return cast(Dict[str, Any], data)

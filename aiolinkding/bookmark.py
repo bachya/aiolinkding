@@ -4,6 +4,8 @@ from __future__ import annotations
 from collections.abc import Awaitable
 from typing import Any, Callable, Dict, cast
 
+from aiolinkding.util import generate_api_payload
+
 
 class BookmarkManager:
     """Define the API manager object."""
@@ -21,14 +23,13 @@ class BookmarkManager:
         offset: int | None = None,
     ) -> dict[str, Any]:
         """Return all bookmarks."""
-        params = {}
-        for kwarg, param_name in (
-            (query, "q"),
-            (limit, "limit"),
-            (offset, "offset"),
-        ):
-            if kwarg:
-                params[param_name] = kwarg
+        params = generate_api_payload(
+            (
+                ("q", query),
+                ("limit", limit),
+                ("offset", offset),
+            )
+        )
 
         endpoint = "/api/bookmarks/"
         if archived:
@@ -47,15 +48,14 @@ class BookmarkManager:
         bookmark_id: int | None = None,
     ) -> dict[str, Any]:
         """Create or update a bookmark."""
-        payload: dict[str, str | list] = {}
-        for kwarg, param_name in (
-            (url, "url"),
-            (title, "title"),
-            (description, "description"),
-            (tag_names, "tag_names"),
-        ):
-            if kwarg:
-                payload[param_name] = kwarg
+        payload = generate_api_payload(
+            (
+                ("url", url),
+                ("title", title),
+                ("description", description),
+                ("tag_names", tag_names),
+            )
+        )
 
         if bookmark_id:
             method = "put"

@@ -6,10 +6,10 @@ from typing import Any
 from aiohttp import ClientSession, ClientTimeout
 from aiohttp.client_exceptions import ClientResponseError
 
-from .bookmark import BookmarkManager
-from .const import LOGGER
-from .errors import InvalidTokenError, RequestError
-from .tag import TagManager
+from aiolinkding.bookmark import BookmarkManager
+from aiolinkding.const import LOGGER
+from aiolinkding.errors import InvalidTokenError, RequestError
+from aiolinkding.tag import TagManager
 
 DEFAULT_REQUEST_TIMEOUT = 10
 
