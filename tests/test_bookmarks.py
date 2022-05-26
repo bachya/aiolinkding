@@ -190,7 +190,7 @@ async def test_update(aresponses, bookmarks_async_get_single_response):
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/1/",
-        "put",
+        "patch",
         aresponses.Response(
             text=json.dumps(bookmarks_async_get_single_response),
             status=200,
