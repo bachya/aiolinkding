@@ -174,11 +174,12 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-`client.bookmarks.async_create()` takes three optional parameters:
+`client.bookmarks.async_create()` takes four optional parameters:
 
 * `title`: the bookmark's title
 * `description`: the bookmark's description
 * `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
+* `is_archived`: whether the newly-created bookmark should automatically be archived
 
 ### Updating an Existing Bookmark by ID
 
