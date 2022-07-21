@@ -8,6 +8,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/189379773edd4035a612/maintainability)](https://codeclimate.com/github/bachya/aiolinkding/maintainability)
 [![Say Thanks](https://img.shields.io/badge/SayThanks-!-1EAEDB.svg)](https://saythanks.io/to/bachya)
 
+<a href="https://www.buymeacoffee.com/bachya1208P" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
 `aiolinkding` is a Python3, async library that interfaces with
 [linkding](https://github.com/sissbruecker/linkding) instances. It is intended to be a
 reasonably light wrapper around the linkding API (meaning that instead of drowning the user
