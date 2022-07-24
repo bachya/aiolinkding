@@ -110,6 +110,7 @@ class BookmarkManager:
         title: str | None = None,
         description: str | None = None,
         tag_names: list[str] | None = None,
+        unread: bool = False,
     ) -> dict[str, Any]:
         """Update an existing bookmark."""
         payload = generate_api_payload(
@@ -118,6 +119,7 @@ class BookmarkManager:
                 ("title", title),
                 ("description", description),
                 ("tag_names", tag_names),
+                ("unread", unread),
             )
         )
 

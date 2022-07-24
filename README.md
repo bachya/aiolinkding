@@ -220,6 +220,7 @@ will change that value for the existing bookmark):
 * `title`: the bookmark's title
 * `description`: the bookmark's description
 * `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
+* `unread`: whether the bookmark should be marked as unread
 
 ### Archiving/Unarchiving a Bookmark
 
