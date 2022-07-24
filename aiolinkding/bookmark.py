@@ -76,6 +76,7 @@ class BookmarkManager:
         description: str | None = None,
         tag_names: list[str] | None = None,
         is_archived: bool = False,
+        unread: bool = False,
     ) -> dict[str, Any]:
         """Create a new bookmark."""
         payload = generate_api_payload(
@@ -85,6 +86,7 @@ class BookmarkManager:
                 ("description", description),
                 ("tag_names", tag_names),
                 ("is_archived", is_archived),
+                ("unread", unread),
             )
         )
 

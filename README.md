@@ -182,6 +182,7 @@ asyncio.run(main())
 * `description`: the bookmark's description
 * `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
 * `is_archived`: whether the newly-created bookmark should automatically be archived
+* `unread`: whether the newly-created bookmark should be marked as unread
 
 ### Updating an Existing Bookmark by ID
 
