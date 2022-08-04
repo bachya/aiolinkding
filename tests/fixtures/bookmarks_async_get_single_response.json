@@ -7,6 +7,7 @@
   "website_description": "Website description",
   "is_archived": false,
   "unread": false,
+  "shared": false,
   "tag_names": [
     "tag1",
     "tag2"
