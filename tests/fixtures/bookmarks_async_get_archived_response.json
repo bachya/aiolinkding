@@ -10,8 +10,9 @@
       "description": "Example description",
       "website_title": "Website title",
       "website_description": "Website description",
-      "is_archived": false,
+      "is_archived": true,
       "unread": false,
+      "shared": false,
       "tag_names": [
         "tag1",
         "tag2"
