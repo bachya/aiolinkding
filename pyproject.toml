@@ -46,7 +46,7 @@ warn_unused_ignores = true
 
 [tool.poetry]
 name = "aiolinkding"
-version = "2022.08.0"
+version = "2022.10.0"
 description = "A Python3, async interface to the linkding REST API"
 readme = "README.md"
 authors = ["Aaron Bach <bachya1208@gmail.com>"]
