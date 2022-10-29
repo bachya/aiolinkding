@@ -2,6 +2,7 @@
 # pylint: disable=protected-access
 import aiohttp
 import pytest
+from aresponses import ResponsesMockServer
 
 from aiolinkding import Client
 from aiolinkding.errors import InvalidTokenError, RequestError
@@ -10,8 +11,12 @@ from .common import TEST_TOKEN, TEST_URL, load_fixture
 
 
 @pytest.mark.asyncio
-async def test_invalid_token(aresponses):
-    """Test an API call with an invalid token."""
+async def test_invalid_token(aresponses: ResponsesMockServer) -> None:
+    """Test an API call with an invalid token.
+
+    Args:
+        aresponses: An aresponses server.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/whatever/",
@@ -32,8 +37,12 @@ async def test_invalid_token(aresponses):
 
 
 @pytest.mark.asyncio
-async def test_request_error(aresponses):
-    """Test an API call with a general request error."""
+async def test_request_error(aresponses: ResponsesMockServer) -> None:
+    """Test an API call with a general request error.
+
+    Args:
+        aresponses: An aresponses server.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/whatever/",

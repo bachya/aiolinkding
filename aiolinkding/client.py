@@ -14,13 +14,19 @@ from aiolinkding.tag import TagManager
 DEFAULT_REQUEST_TIMEOUT = 10
 
 
-class Client:
+class Client:  # pylint: disable=too-few-public-methods
     """Define a client for the linkding API."""
 
     def __init__(
         self, url: str, token: str, *, session: ClientSession | None = None
     ) -> None:
-        """Initialize."""
+        """Initialize.
+
+        Args:
+            url: The full URL to a linkding instance.
+            token: A linkding API token.
+            session: An optional aiohttp ClientSession.
+        """
         self._session = session
         self._token = token
         self._url = url
@@ -31,19 +37,29 @@ class Client:
     async def async_request(
         self, method: str, endpoint: str, **kwargs: dict[str, Any]
     ) -> dict[str, Any]:
-        """Make an API request."""
+        """Make an API request.
+
+        Args:
+            method: An HTTP method.
+            endpoint: A relative API endpoint.
+            **kwargs: Additional kwargs to send with the request.
+
+        Returns:
+            An API response payload.
+
+        Raises:
+            InvalidTokenError: Raised upon an invalid API token.
+            RequestError: Raised upon an underlying HTTP error.
+        """
         kwargs.setdefault("headers", {})
         kwargs["headers"]["Authorization"] = f"Token {self._token}"
 
-        use_running_session = self._session and not self._session.closed
-        if use_running_session:
+        if use_running_session := self._session and not self._session.closed:
             session = self._session
         else:
             session = ClientSession(
                 timeout=ClientTimeout(total=DEFAULT_REQUEST_TIMEOUT)
             )
-
-        assert session
 
         data: dict[str, Any] = {}
 

@@ -1,9 +1,11 @@
 """Define tests for the client."""
 # pylint: disable=protected-access
 import json
+from typing import Any
 
 import aiohttp
 import pytest
+from aresponses import ResponsesMockServer
 
 from aiolinkding import Client
 
@@ -11,8 +13,12 @@ from .common import TEST_TOKEN, TEST_URL
 
 
 @pytest.mark.asyncio
-async def test_archive(aresponses):
-    """Test archiving a bookmark."""
+async def test_archive(aresponses: ResponsesMockServer) -> None:
+    """Test archiving a bookmark.
+
+    Args:
+        aresponses: An aresponses server.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/1/archive/",
@@ -28,8 +34,15 @@ async def test_archive(aresponses):
 
 
 @pytest.mark.asyncio
-async def test_create(aresponses, bookmarks_async_get_single_response):
-    """Test creating a single bookmark."""
+async def test_create(
+    aresponses: ResponsesMockServer, bookmarks_async_get_single_response: dict[str, Any]
+) -> None:
+    """Test creating a single bookmark.
+
+    Args:
+        aresponses: An aresponses server.
+        bookmarks_async_get_single_response: An API response payload.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/",
@@ -58,8 +71,12 @@ async def test_create(aresponses, bookmarks_async_get_single_response):
 
 
 @pytest.mark.asyncio
-async def test_delete(aresponses):
-    """Test deleting a bookmark."""
+async def test_delete(aresponses: ResponsesMockServer) -> None:
+    """Test deleting a bookmark.
+
+    Args:
+        aresponses: An aresponses server.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/1/",
@@ -75,8 +92,15 @@ async def test_delete(aresponses):
 
 
 @pytest.mark.asyncio
-async def test_get_all(aresponses, bookmarks_async_get_all_response):
-    """Test getting all bookmarks."""
+async def test_get_all(
+    aresponses: ResponsesMockServer, bookmarks_async_get_all_response: dict[str, Any]
+) -> None:
+    """Test getting all bookmarks.
+
+    Args:
+        aresponses: An aresponses server.
+        bookmarks_async_get_all_response: An API response payload.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/?limit=100",
@@ -100,9 +124,14 @@ async def test_get_all(aresponses, bookmarks_async_get_all_response):
 
 @pytest.mark.asyncio
 async def test_get_all_no_explicit_session(
-    aresponses, bookmarks_async_get_all_response
-):
-    """Test getting all bookmarks without an explicit ClientSession."""
+    aresponses: ResponsesMockServer, bookmarks_async_get_all_response: dict[str, Any]
+) -> None:
+    """Test getting all bookmarks without an explicit ClientSession.
+
+    Args:
+        aresponses: An aresponses server.
+        bookmarks_async_get_all_response: An API response payload.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/",
@@ -124,8 +153,16 @@ async def test_get_all_no_explicit_session(
 
 
 @pytest.mark.asyncio
-async def test_get_archived(aresponses, bookmarks_async_get_archived_response):
-    """Test getting archived bookmarks."""
+async def test_get_archived(
+    aresponses: ResponsesMockServer,
+    bookmarks_async_get_archived_response: dict[str, Any],
+) -> None:
+    """Test getting archived bookmarks.
+
+    Args:
+        aresponses: An aresponses server.
+        bookmarks_async_get_archived_response: An API response payload.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/archived/",
@@ -146,8 +183,15 @@ async def test_get_archived(aresponses, bookmarks_async_get_archived_response):
 
 
 @pytest.mark.asyncio
-async def test_get_single(aresponses, bookmarks_async_get_single_response):
-    """Test getting a single bookmark."""
+async def test_get_single(
+    aresponses: ResponsesMockServer, bookmarks_async_get_single_response: dict[str, Any]
+) -> None:
+    """Test getting a single bookmark.
+
+    Args:
+        aresponses: An aresponses server.
+        bookmarks_async_get_single_response: An API response payload.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/1/",
@@ -168,8 +212,12 @@ async def test_get_single(aresponses, bookmarks_async_get_single_response):
 
 
 @pytest.mark.asyncio
-async def test_unarchive(aresponses):
-    """Test unarchiving a bookmark."""
+async def test_unarchive(aresponses: ResponsesMockServer) -> None:
+    """Test unarchiving a bookmark.
+
+    Args:
+        aresponses: An aresponses server.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/1/unarchive/",
@@ -185,8 +233,15 @@ async def test_unarchive(aresponses):
 
 
 @pytest.mark.asyncio
-async def test_update(aresponses, bookmarks_async_get_single_response):
-    """Test creating a single bookmark."""
+async def test_update(
+    aresponses: ResponsesMockServer, bookmarks_async_get_single_response: dict[str, Any]
+) -> None:
+    """Test creating a single bookmark.
+
+    Args:
+        aresponses: An aresponses server.
+        bookmarks_async_get_single_response: An API response payload.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/bookmarks/1/",
