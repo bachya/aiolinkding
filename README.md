@@ -15,28 +15,29 @@
 reasonably light wrapper around the linkding API (meaning that instead of drowning the user
 in custom objects/etc., it focuses on returning JSON straight from the API).
 
- [Installation](#installation)
+[Installation](#installation)
+
 - [Python Versions](#python-versions)
 - [Usage](#usage)
-  * [Creating a Client](#creating-a-client)
-  * [Working with Bookmarks](#working-with-bookmarks)
-    + [Getting All Bookmarks](#getting-all-bookmarks)
-    + [Getting Archived Bookmarks](#getting-archived-bookmarks)
-    + [Getting a Single Bookmark](#getting-a-single-bookmark-by-id)
-    + [Creating a New Bookmark](#creating-a-new-bookmark)
-    + [Updating an Existing Bookmark by ID](#updating-an-existing-bookmark-by-id)
-    + [Archiving/Unarchiving a Bookmark](#archivingunarchiving-a-bookmark)
-    + [Deleting a Bookmark](#deleting-a-bookmark)
-  * [Working with Tags](#working-with-tags)
-    + [Getting All Tags](#getting-all-tags)
-    + [Getting a Single Tag](#getting-a-single-tag-by-id)
-    + [Creating a New Tag](#creating-a-new-Tag)
-  * [Connection Pooling](#connection-pooling)
+  - [Creating a Client](#creating-a-client)
+  - [Working with Bookmarks](#working-with-bookmarks)
+    - [Getting All Bookmarks](#getting-all-bookmarks)
+    - [Getting Archived Bookmarks](#getting-archived-bookmarks)
+    - [Getting a Single Bookmark](#getting-a-single-bookmark-by-id)
+    - [Creating a New Bookmark](#creating-a-new-bookmark)
+    - [Updating an Existing Bookmark by ID](#updating-an-existing-bookmark-by-id)
+    - [Archiving/Unarchiving a Bookmark](#archivingunarchiving-a-bookmark)
+    - [Deleting a Bookmark](#deleting-a-bookmark)
+  - [Working with Tags](#working-with-tags)
+    - [Getting All Tags](#getting-all-tags)
+    - [Getting a Single Tag](#getting-a-single-tag-by-id)
+    - [Creating a New Tag](#creating-a-new-Tag)
+  - [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
 # Installation
 
-```python
+```bash
 pip install aiolinkding
 ```
 
@@ -44,9 +45,9 @@ pip install aiolinkding
 
 `aiolinkding` is currently supported on:
 
-* Python 3.9
-* Python 3.10
-* Python 3.11
+- Python 3.9
+- Python 3.10
+- Python 3.11
 
 # Usage
 
@@ -98,9 +99,9 @@ asyncio.run(main())
 
 `client.bookmarks.async_get_all()` takes three optional parameters:
 
-* `query`: a string query to filter the returned bookmarks
-* `limit`: the maximum number of results that should be returned
-* `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
+- `query`: a string query to filter the returned bookmarks
+- `limit`: the maximum number of results that should be returned
+- `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
 
 ### Getting Archived Bookmarks
 
@@ -124,9 +125,9 @@ asyncio.run(main())
 
 `client.bookmarks.async_get_archived()` takes three optional parameters:
 
-* `query`: a string query to filter the returned bookmarks
-* `limit`: the maximum number of results that should be returned
-* `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
+- `query`: a string query to filter the returned bookmarks
+- `limit`: the maximum number of results that should be returned
+- `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
 
 ### Getting a Single Bookmark by ID
 
@@ -178,12 +179,12 @@ asyncio.run(main())
 
 `client.bookmarks.async_create()` takes four optional parameters:
 
-* `title`: the bookmark's title
-* `description`: the bookmark's description
-* `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
-* `is_archived`: whether the newly-created bookmark should automatically be archived
-* `unread`: whether the newly-created bookmark should be marked as unread
-* `shared`: whether the newly-created bookmark should be shareable with other linkding users
+- `title`: the bookmark's title
+- `description`: the bookmark's description
+- `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
+- `is_archived`: whether the newly-created bookmark should automatically be archived
+- `unread`: whether the newly-created bookmark should be marked as unread
+- `shared`: whether the newly-created bookmark should be shareable with other linkding users
 
 ### Updating an Existing Bookmark by ID
 
@@ -217,12 +218,12 @@ asyncio.run(main())
 `client.bookmarks.async_update()` takes four optional parameters (inclusion of any parameter
 will change that value for the existing bookmark):
 
-* `url`: the bookmark's URL
-* `title`: the bookmark's title
-* `description`: the bookmark's description
-* `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
-* `unread`: whether the bookmark should be marked as unread
-* `shared`: whether the bookmark should be shareable with other linkding users
+- `url`: the bookmark's URL
+- `title`: the bookmark's title
+- `description`: the bookmark's description
+- `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
+- `unread`: whether the bookmark should be marked as unread
+- `shared`: whether the bookmark should be shareable with other linkding users
 
 ### Archiving/Unarchiving a Bookmark
 
@@ -291,8 +292,8 @@ asyncio.run(main())
 
 `client.tags.async_get_all()` takes two optional parameters:
 
-* `limit`: the maximum number of results that should be returned
-* `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
+- `limit`: the maximum number of results that should be returned
+- `offset`: the index from which to return results (e.g., `5` starts at the fifth bookmark)
 
 ### Getting a Single Tag by ID
 
@@ -363,14 +364,14 @@ asyncio.run(main())
 # Contributing
 
 1. [Check for open features/bugs](https://github.com/bachya/aiolinkding/issues)
-  or [initiate a discussion on one](https://github.com/bachya/aiolinkding/issues/new).
+   or [initiate a discussion on one](https://github.com/bachya/aiolinkding/issues/new).
 2. [Fork the repository](https://github.com/bachya/aiolinkding/fork).
 3. (_optional, but highly recommended_) Create a virtual environment: `python3 -m venv .venv`
 4. (_optional, but highly recommended_) Enter the virtual environment: `source ./.venv/bin/activate`
 5. Install the dev environment: `script/setup`
 6. Code your new feature or bug fix.
 7. Write tests that cover your new functionality.
-8. Run tests and ensure 100% code coverage: `nox -rs coverage`
+8. Run tests and ensure 100% code coverage: `poetry run pytest --cov aiolinkding tests`
 9. Update `README.md` with any new documentation.
 10. Add yourself to `AUTHORS.md`.
 11. Submit a pull request!

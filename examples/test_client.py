@@ -3,13 +3,14 @@ import asyncio
 import logging
 
 from aiohttp import ClientSession
+
 from aiolinkding import Client
 from aiolinkding.errors import LinkDingError
 
 _LOGGER = logging.getLogger()
 
 URL = "<LINDKING URL>"
-TOKEN = "<LINDKING TOKEN>"
+TOKEN = "<LINDKING TOKEN>"  # noqa: S105
 
 
 async def main() -> None:

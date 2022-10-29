@@ -1,9 +1,11 @@
 """Define tests for the client."""
 # pylint: disable=protected-access
 import json
+from typing import Any
 
 import aiohttp
 import pytest
+from aresponses import ResponsesMockServer
 
 from aiolinkding import Client
 
@@ -11,8 +13,15 @@ from .common import TEST_TOKEN, TEST_URL
 
 
 @pytest.mark.asyncio
-async def test_create(aresponses, tags_async_get_single_response):
-    """Test creating a single tag."""
+async def test_create(
+    aresponses: ResponsesMockServer, tags_async_get_single_response: dict[str, Any]
+) -> None:
+    """Test creating a single tag.
+
+    Args:
+        aresponses: An aresponses server.
+        tags_async_get_single_response: An API response payload.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/tags/",
@@ -33,8 +42,15 @@ async def test_create(aresponses, tags_async_get_single_response):
 
 
 @pytest.mark.asyncio
-async def test_get_all(aresponses, tags_async_get_all_response):
-    """Test getting all tags."""
+async def test_get_all(
+    aresponses: ResponsesMockServer, tags_async_get_all_response: dict[str, Any]
+) -> None:
+    """Test getting all tags.
+
+    Args:
+        aresponses: An aresponses server.
+        tags_async_get_all_response: An API response payload.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/tags/?limit=100",
@@ -57,8 +73,15 @@ async def test_get_all(aresponses, tags_async_get_all_response):
 
 
 @pytest.mark.asyncio
-async def test_get_single(aresponses, tags_async_get_single_response):
-    """Test getting a single tag."""
+async def test_get_single(
+    aresponses: ResponsesMockServer, tags_async_get_single_response: dict[str, Any]
+) -> None:
+    """Test getting a single tag.
+
+    Args:
+        aresponses: An aresponses server.
+        tags_async_get_single_response: An API response payload.
+    """
     aresponses.add(
         "127.0.0.1:8000",
         "/api/tags/1/",
