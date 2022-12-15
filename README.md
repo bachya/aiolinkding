@@ -384,7 +384,7 @@ Thanks to all of [our contributors][contributors] so far!
 [issues]: https://github.com/bachya/aiolinkding/issues
 [license-badge]: https://img.shields.io/pypi/l/aiolinkding.svg
 [license]: https://github.com/bachya/aiolinkding/blob/main/LICENSE
-[maintainability-badge]: https://api.codeclimate.com/v1/badges/a03c9e96f19a3dc37f98/maintainability
+[maintainability-badge]: https://api.codeclimate.com/v1/badges/189379773edd4035a612/maintainability
 [maintainability]: https://codeclimate.com/github/bachya/aiolinkding/maintainability
 [new-issue]: https://github.com/bachya/aiolinkding/issues/new
 [new-issue]: https://github.com/bachya/aiolinkding/issues/new
