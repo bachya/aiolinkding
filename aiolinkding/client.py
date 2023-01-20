@@ -5,13 +5,21 @@ from typing import Any
 
 from aiohttp import ClientSession, ClientTimeout
 from aiohttp.client_exceptions import ClientResponseError
+from packaging import version
 
 from aiolinkding.bookmark import BookmarkManager
 from aiolinkding.const import LOGGER
-from aiolinkding.errors import InvalidTokenError, RequestError
+from aiolinkding.errors import (
+    InvalidServerVersionError,
+    InvalidTokenError,
+    RequestError,
+    UnknownEndpointError,
+)
 from aiolinkding.tag import TagManager
 
 DEFAULT_REQUEST_TIMEOUT = 10
+
+MINIMUM_LINKDING_VERSION_REQUIRED = version.parse("1.13.0")
 
 
 class Client:  # pylint: disable=too-few-public-methods
@@ -50,6 +58,7 @@ class Client:  # pylint: disable=too-few-public-methods
         Raises:
             InvalidTokenError: Raised upon an invalid API token.
             RequestError: Raised upon an underlying HTTP error.
+            UnknownEndpointError: Raised when requesting an unknown API endpoint.
         """
         kwargs.setdefault("headers", {})
         kwargs["headers"]["Authorization"] = f"Token {self._token}"
@@ -74,8 +83,13 @@ class Client:  # pylint: disable=too-few-public-methods
                 # An HTTP 204 will not return parsable JSON data, but it's still a
                 # successful response, so we swallow the exception and return:
                 return {}
-            if err.status == 401:
+            if resp.status == 401:
                 raise InvalidTokenError("Invalid API token") from err
+            if resp.status == 404:
+                # We break out this particular response for the health check; if we
+                # catch this when querying GET /health, we can raise a better final
+                # exception:
+                raise UnknownEndpointError(f"Unknown API endpoint: {endpoint}") from err
             raise RequestError(f"Error while requesting {endpoint}: {data}") from err
         finally:
             if not use_running_session:
@@ -84,3 +98,40 @@ class Client:  # pylint: disable=too-few-public-methods
         LOGGER.debug("Data received for %s: %s", endpoint, data)
 
         return data
+
+
+async def async_get_client(
+    url: str, token: str, *, session: ClientSession | None = None
+) -> Client:
+    """Get an authenticated, version-checked client.
+
+    Args:
+        url: The full URL to a linkding instance.
+        token: A linkding API token.
+        session: An optional aiohttp ClientSession.
+
+    Returns:
+        A Client object.
+
+    Raises:
+        InvalidServerVersionError: Raised when the server version is too low.
+    """
+    client = Client(url, token, session=session)
+
+    try:
+        health_resp = await client.async_request("get", "/health")
+    except UnknownEndpointError as err:
+        raise InvalidServerVersionError(
+            f"Server version is below the minimum version "
+            f"required ({MINIMUM_LINKDING_VERSION_REQUIRED})"
+        ) from err
+
+    server_version = version.parse(health_resp["version"])
+
+    if server_version < MINIMUM_LINKDING_VERSION_REQUIRED:
+        raise InvalidServerVersionError(
+            f"Server version ({server_version}) is below the minimum version "
+            f"required ({MINIMUM_LINKDING_VERSION_REQUIRED})"
+        )
+
+    return client
