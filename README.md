@@ -60,12 +60,12 @@ parameters:
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
 
 asyncio.run(main())
@@ -80,12 +80,12 @@ The `Client` object provides easy access to several bookmark-related API operati
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get all bookmarks:
     bookmarks = await client.bookmarks.async_get_all()
@@ -106,12 +106,12 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get all archived bookmarks:
     bookmarks = await client.bookmarks.async_get_archived()
@@ -132,12 +132,12 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get a single bookmark:
     bookmark = await client.bookmarks.async_get_single(37)
@@ -152,12 +152,12 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Create a new bookmark:
     created_bookmark = await client.bookmarks.async_create(
@@ -189,12 +189,12 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Update an existing bookmark:
     updated_bookmark = await client.bookmarks.async_update(
@@ -228,12 +228,12 @@ will change that value for the existing bookmark):
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Archive a bookmark by ID:
     await client.bookmarks.async_archive(37)
@@ -250,12 +250,12 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Delete a bookmark by ID:
     await client.bookmarks.async_delete(37)
@@ -273,12 +273,12 @@ The `Client` object also provides easy access to several tag-related API operati
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get all tags:
     tags = await client.tags.async_get_all()
@@ -298,12 +298,12 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Get a single tag:
     tag = await client.tags.async_get_single(22)
@@ -318,12 +318,12 @@ asyncio.run(main())
 ```python
 import asyncio
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
-    client = Client("http://127.0.0.1:8000", "token_abcde12345")
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
 
     # Create a new tag:
     created_tag = await client.tags.async_create("example-tag")
@@ -343,14 +343,16 @@ connection pooling:
 ```python
 import asyncio
 
-from aiohttp import ClientSession
-from aiolinkding import Client
+from aiohttp import async_get_clientSession
+from aiolinkding import async_get_client
 
 
 async def main() -> None:
     """Use aiolinkding for fun and profit."""
     async with ClientSession() as session:
-        client = Client("http://127.0.0.1:8000", "token_abcde12345", session=session)
+        client = await async_get_client(
+            "http://127.0.0.1:8000", "token_abcde12345", session=session
+        )
 
         # Get to work...
 
