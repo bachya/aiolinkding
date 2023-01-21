@@ -7,6 +7,7 @@ import aiohttp
 import pytest
 from aresponses import ResponsesMockServer
 
+from aiolinkding.client import MINIMUM_SERVER_VERSION_REQUIRED
 from tests.common import load_fixture
 
 
@@ -60,7 +61,7 @@ def bookmarks_async_get_single_response_fixture() -> dict[str, Any]:
 def health_response_fixture() -> dict[str, Any]:
     """Define a fixture to return a healthy health response."""
     return {
-        "version": "1.16.1",
+        "version": str(MINIMUM_SERVER_VERSION_REQUIRED),
         "status": "healthy",
     }
 
