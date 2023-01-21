@@ -16,44 +16,10 @@ from .common import TEST_TOKEN, TEST_URL
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize(
-    "health_response",
-    [
-        {
-            "version": "1.0.0",
-            "status": "healthy",
-        }
-    ],
-)
-async def test_invalid_server_version_endpoint_exists(
-    aresponses: ResponsesMockServer,
-    health_response: dict[str, Any],
-) -> None:
-    """Test an API call with an invalid server version (when /health exists).
-
-    Args:
-        aresponses: An aresponses server.
-        health_response: An API response payload.
-    """
-    aresponses.add(
-        "127.0.0.1:8000",
-        "/health",
-        "get",
-        response=aiohttp.web_response.json_response(health_response, status=200),
-    )
-
-    async with aiohttp.ClientSession() as session:
-        with pytest.raises(InvalidServerVersionError):
-            _ = await async_get_client(TEST_URL, TEST_TOKEN, session=session)
-
-    aresponses.assert_plan_strictly_followed()
-
-
-@pytest.mark.asyncio
-async def test_invalid_server_version_endpoint_missing(
+async def test_health_endpiont_missing(
     aresponses: ResponsesMockServer,
 ) -> None:
-    """Test an API call with an invalid server version (when /health missing).
+    """Test an API call when /health missing.
 
     Args:
         aresponses: An aresponses server.
@@ -65,6 +31,40 @@ async def test_invalid_server_version_endpoint_missing(
         response=aresponses.Response(
             text=None, status=404, headers={"Content-Type": "text/html; charset=utf-8"}
         ),
+    )
+
+    async with aiohttp.ClientSession() as session:
+        with pytest.raises(InvalidServerVersionError):
+            _ = await async_get_client(TEST_URL, TEST_TOKEN, session=session)
+
+    aresponses.assert_plan_strictly_followed()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "health_response",
+    [
+        {
+            "version": "1.0.0",
+            "status": "healthy",
+        }
+    ],
+)
+async def test_invalid_server_version(
+    aresponses: ResponsesMockServer,
+    health_response: dict[str, Any],
+) -> None:
+    """Test an API call with an invalid server version.
+
+    Args:
+        aresponses: An aresponses server.
+        health_response: An API response payload.
+    """
+    aresponses.add(
+        "127.0.0.1:8000",
+        "/health",
+        "get",
+        response=aiohttp.web_response.json_response(health_response, status=200),
     )
 
     async with aiohttp.ClientSession() as session:
