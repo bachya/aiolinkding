@@ -6,6 +6,10 @@ import pytest
 from aresponses import ResponsesMockServer
 
 from aiolinkding import async_get_client
+from aiolinkding.client import (
+    SERVER_VERSION_HEALTH_CHECK_INTRODUCED,
+    SERVER_VERSION_MINIMUM_REQUIRED,
+)
 from aiolinkding.errors import (
     InvalidServerVersionError,
     InvalidTokenError,
@@ -34,8 +38,12 @@ async def test_health_endpiont_missing(
     )
 
     async with aiohttp.ClientSession() as session:
-        with pytest.raises(InvalidServerVersionError):
+        with pytest.raises(InvalidServerVersionError) as err:
             _ = await async_get_client(TEST_URL, TEST_TOKEN, session=session)
+        assert str(err.value) == (
+            f"Server version (older than {SERVER_VERSION_HEALTH_CHECK_INTRODUCED}) is "
+            f"below the minimum version required ({SERVER_VERSION_MINIMUM_REQUIRED})"
+        )
 
     aresponses.assert_plan_strictly_followed()
 
@@ -68,8 +76,12 @@ async def test_invalid_server_version(
     )
 
     async with aiohttp.ClientSession() as session:
-        with pytest.raises(InvalidServerVersionError):
+        with pytest.raises(InvalidServerVersionError) as err:
             _ = await async_get_client(TEST_URL, TEST_TOKEN, session=session)
+        assert str(err.value) == (
+            f"Server version (1.0.0) is below the minimum version required "
+            f"({SERVER_VERSION_MINIMUM_REQUIRED})"
+        )
 
     aresponses.assert_plan_strictly_followed()
 
