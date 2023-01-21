@@ -4,7 +4,7 @@ import logging
 
 from aiohttp import ClientSession
 
-from aiolinkding import Client
+from aiolinkding import async_get_client
 from aiolinkding.errors import LinkDingError
 
 _LOGGER = logging.getLogger()
@@ -18,7 +18,7 @@ async def main() -> None:
     logging.basicConfig(level=logging.INFO)
     async with ClientSession() as session:
         try:
-            client = Client(URL, TOKEN, session=session)
+            client = await async_get_client(URL, TOKEN, session=session)
 
             bookmarks = await client.bookmarks.async_get_all()
             _LOGGER.info("Bookmarks: %s", bookmarks)
