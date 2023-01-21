@@ -19,11 +19,12 @@ from aiolinkding.tag import TagManager
 
 DEFAULT_REQUEST_TIMEOUT = 10
 
-MINIMUM_SERVER_VERSION_REQUIRED = version.parse("1.17.0")
+SERVER_VERSION_HEALTH_CHECK_INTRODUCED = version.parse("1.17.0")
+SERVER_VERSION_MINIMUM_REQUIRED = version.parse("1.17.0")
 
 INVALID_SERVER_VERSION_MESSAGE = (
     "Server version ({0}) is below the minimum version required "
-    f"({MINIMUM_SERVER_VERSION_REQUIRED})"
+    f"({SERVER_VERSION_MINIMUM_REQUIRED})"
 )
 
 
@@ -127,12 +128,14 @@ async def async_get_client(
         health_resp = await client.async_request("get", "/health")
     except UnknownEndpointError as err:
         raise InvalidServerVersionError(
-            INVALID_SERVER_VERSION_MESSAGE.format("unknown")
+            INVALID_SERVER_VERSION_MESSAGE.format(
+                f"older than {SERVER_VERSION_HEALTH_CHECK_INTRODUCED}"
+            )
         ) from err
 
     server_version = version.parse(health_resp["version"])
 
-    if server_version < MINIMUM_SERVER_VERSION_REQUIRED:
+    if server_version < SERVER_VERSION_MINIMUM_REQUIRED:
         raise InvalidServerVersionError(
             INVALID_SERVER_VERSION_MESSAGE.format(server_version)
         )
