@@ -93,12 +93,6 @@ repos:
         language: system
         types: [text]
         entry: poetry run fix-byte-order-marker
-      - id: flake8
-        name: 👔 Enforcing style guide with flake8
-        language: system
-        types: [python]
-        entry: poetry run flake8
-        require_serial: true
       - id: isort
         name: 🔀 Sorting all imports with isort
         language: system
@@ -130,12 +124,6 @@ repos:
         language: system
         types: [python]
         entry: poetry run pylint
-      - id: pytest
-        name: 🧪 Running tests and test coverage with pytest
-        language: system
-        types: [python]
-        entry: poetry run pytest aiolinkding tests
-        pass_filenames: false
       - id: pyupgrade
         name: 🆙 Checking for upgradable syntax with pyupgrade
         language: system
@@ -148,6 +136,11 @@ repos:
         types: [text]
         entry: poetry run trailing-whitespace-fixer
         stages: [commit, push, manual]
+      - id: ruff
+        name: 👔 Enforcing style guide with ruff
+        language: system
+        types: [python]
+        entry: poetry run ruff --fix
       - id: vulture
         name: 🔍 Finding unused Python code with Vulture
         language: system
