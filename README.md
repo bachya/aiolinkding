@@ -179,6 +179,7 @@ asyncio.run(main())
 
 - `title`: the bookmark's title
 - `description`: the bookmark's description
+- `notes`: Markdown notes to add to the bookmark
 - `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
 - `is_archived`: whether the newly-created bookmark should automatically be archived
 - `unread`: whether the newly-created bookmark should be marked as unread
@@ -219,6 +220,7 @@ will change that value for the existing bookmark):
 - `url`: the bookmark's URL
 - `title`: the bookmark's title
 - `description`: the bookmark's description
+- `notes`: Markdown notes to add to the bookmark
 - `tag_names`: the tags to assign to the bookmark (represented as a list of strings)
 - `unread`: whether the bookmark should be marked as unread
 - `shared`: whether the bookmark should be shareable with other linkding users
