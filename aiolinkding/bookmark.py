@@ -113,6 +113,7 @@ class BookmarkManager:
         *,
         title: str | None = None,
         description: str | None = None,
+        notes: str | None = None,
         tag_names: list[str] | None = None,
         is_archived: bool = False,
         unread: bool = False,
@@ -124,6 +125,7 @@ class BookmarkManager:
             url: The bookmark URL.
             title: The bookmark title.
             description: The bookmark description.
+            notes: Any Markdown-formatted notes.
             tag_names: A list of strings to use as tags.
             is_archived: Immediately archive the bookmark.
             unread: Immediately mark the bookmark as unread.
@@ -137,6 +139,7 @@ class BookmarkManager:
                 ("url", url),
                 ("title", title),
                 ("description", description),
+                ("notes", notes),
                 ("tag_names", tag_names),
                 ("is_archived", is_archived),
                 ("unread", unread),
@@ -172,6 +175,7 @@ class BookmarkManager:
         url: str | None = None,
         title: str | None = None,
         description: str | None = None,
+        notes: str | None = None,
         tag_names: list[str] | None = None,
         unread: bool = False,
         shared: bool = False,
@@ -183,6 +187,7 @@ class BookmarkManager:
             url: The bookmark URL.
             title: The bookmark title.
             description: The bookmark description.
+            notes: Any Markdown-formatted notes.
             tag_names: A list of strings to use as tags.
             unread: Immediately mark the bookmark as unread.
             shared: Immediately mark the bookmark as shared.
@@ -195,6 +200,7 @@ class BookmarkManager:
                 ("url", url),
                 ("title", title),
                 ("description", description),
+                ("notes", notes),
                 ("tag_names", tag_names),
                 ("unread", unread),
                 ("shared", shared),
