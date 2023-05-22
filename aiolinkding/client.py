@@ -20,7 +20,7 @@ from aiolinkding.tag import TagManager
 DEFAULT_REQUEST_TIMEOUT = 10
 
 SERVER_VERSION_HEALTH_CHECK_INTRODUCED = version.parse("1.17.0")
-SERVER_VERSION_MINIMUM_REQUIRED = version.parse("1.17.0")
+SERVER_VERSION_MINIMUM_REQUIRED = version.parse("1.19.0")
 
 INVALID_SERVER_VERSION_MESSAGE = (
     "Server version ({0}) is below the minimum version required "
