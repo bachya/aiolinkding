@@ -30,6 +30,8 @@ returning JSON straight from the API).
     - [Getting All Tags](#getting-all-tags)
     - [Getting a Single Tag](#getting-a-single-tag-by-id)
     - [Creating a New Tag](#creating-a-new-Tag)
+  - [Working with User Data](#working-with-user-data)
+    - [Getting Profile Info](#getting-profile-info)
   - [Connection Pooling](#connection-pooling)
 - [Contributing](#contributing)
 
@@ -72,8 +74,6 @@ asyncio.run(main())
 ```
 
 ## Working with Bookmarks
-
-The `Client` object provides easy access to several bookmark-related API operations.
 
 ### Getting All Bookmarks
 
@@ -268,8 +268,6 @@ asyncio.run(main())
 
 ## Working with Tags
 
-The `Client` object also provides easy access to several tag-related API operations.
-
 ### Getting All Tags
 
 ```python
@@ -330,6 +328,28 @@ async def main() -> None:
     # Create a new tag:
     created_tag = await client.tags.async_create("example-tag")
     # >>> { "id": 22, "name": "example-tag", ... }
+
+
+asyncio.run(main())
+```
+
+## Working with User Data
+
+### Getting Profile Info
+
+```python
+import asyncio
+
+from aiolinkding import async_get_client
+
+
+async def main() -> None:
+    """Use aiolinkding for fun and profit."""
+    client = await async_get_client("http://127.0.0.1:8000", "token_abcde12345")
+
+    # Get all tags:
+    tags = await client.user.async_get_profile()
+    # >>> { "theme": "auto", "bookmark_date_display": "relative", ... }
 
 
 asyncio.run(main())

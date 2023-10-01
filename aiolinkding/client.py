@@ -16,11 +16,12 @@ from aiolinkding.errors import (
     UnknownEndpointError,
 )
 from aiolinkding.tag import TagManager
+from aiolinkding.user import UserManager
 
 DEFAULT_REQUEST_TIMEOUT = 10
 
 SERVER_VERSION_HEALTH_CHECK_INTRODUCED = version.parse("1.17.0")
-SERVER_VERSION_MINIMUM_REQUIRED = version.parse("1.19.0")
+SERVER_VERSION_MINIMUM_REQUIRED = version.parse("1.22.0")
 
 INVALID_SERVER_VERSION_MESSAGE = (
     "Server version ({0}) is below the minimum version required "
@@ -47,6 +48,7 @@ class Client:  # pylint: disable=too-few-public-methods
 
         self.bookmarks = BookmarkManager(self.async_request)
         self.tags = TagManager(self.async_request)
+        self.user = UserManager(self.async_request)
 
     async def async_request(
         self, method: str, endpoint: str, **kwargs: dict[str, Any]
