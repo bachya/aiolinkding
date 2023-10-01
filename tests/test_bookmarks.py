@@ -1,4 +1,4 @@
-"""Define tests for the client."""
+"""Define tests for bookmark endpoints."""
 from typing import Any
 
 import aiohttp

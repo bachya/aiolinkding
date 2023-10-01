@@ -92,3 +92,12 @@ def tags_async_get_single_response_fixture() -> dict[str, Any]:
     return cast(
         dict[str, Any], json.loads(load_fixture("tags_async_get_single_response.json"))
     )
+
+
+@pytest.fixture(name="user_async_get_profile_response", scope="session")
+def user_async_get_profile_response_fixture() -> dict[str, Any]:
+    """Define a fixture to return user profile data."""
+    return cast(
+        dict[str, Any],
+        json.loads(load_fixture("user_async_get_profile_response.json")),
+    )
