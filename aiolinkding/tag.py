@@ -41,7 +41,7 @@ class TagManager:
         """Return all tags.
 
         Args:
-            limit: Limt the number of returned tags.
+            limit: Limit the number of returned tags.
             offset: The index at which to return results.
 
         Returns:
