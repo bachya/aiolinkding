@@ -31,7 +31,7 @@ class BookmarkManager:
         Args:
             archived: Include archived bookmarks.
             query: Return bookmarks matching a query string.
-            limit: Limt the number of returned bookmarks.
+            limit: Limit the number of returned bookmarks.
             offset: The index at which to return results.
 
         Returns:
@@ -78,7 +78,7 @@ class BookmarkManager:
 
         Args:
             query: Return bookmarks matching a query string.
-            limit: Limt the number of returned bookmarks.
+            limit: Limit the number of returned bookmarks.
             offset: The index at which to return results.
 
         Returns:
@@ -97,7 +97,7 @@ class BookmarkManager:
 
         Args:
             query: Return bookmarks matching a query string.
-            limit: Limt the number of returned bookmarks.
+            limit: Limit the number of returned bookmarks.
             offset: The index at which to return results.
 
         Returns:
