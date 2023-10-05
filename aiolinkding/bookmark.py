@@ -107,7 +107,7 @@ class BookmarkManager:
             archived=True, query=query, limit=limit, offset=offset
         )
 
-    async def async_create(
+    async def async_create(  # pylint: disable=too-many-arguments
         self,
         url: str,
         *,
@@ -168,7 +168,7 @@ class BookmarkManager:
         """
         await self._async_request("post", f"/api/bookmarks/{bookmark_id}/unarchive/")
 
-    async def async_update(
+    async def async_update(  # pylint: disable=too-many-arguments
         self,
         bookmark_id: int,
         *,
