@@ -13,7 +13,7 @@ from tests.common import load_fixture
 
 @pytest.fixture(name="authenticated_linkding_api_server")
 def authenticated_linkding_api_server_fixture(
-    health_response: dict[str, Any]
+    health_response: dict[str, Any],
 ) -> Generator[ResponsesMockServer, None, None]:
     """Return a fixture that mocks an authenticated linkding API server.
 
