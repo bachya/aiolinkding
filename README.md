@@ -399,7 +399,7 @@ Thanks to all of [our contributors][contributors] so far!
 
 [aiohttp]: https://github.com/aio-libs/aiohttp
 [linkding]: https://github.com/sissbruecker/linkding
-[ci-badge]: https://github.com/bachya/aiolinkding/workflows/CI/badge.svg
+[ci-badge]: https://img.shields.io/github/actions/workflow/status/bachya/aiolinkding/test.yml
 [ci]: https://github.com/bachya/aiolinkding/actions
 [codecov-badge]: https://codecov.io/gh/bachya/aiolinkding/branch/dev/graph/badge.svg
 [codecov]: https://codecov.io/gh/bachya/aiolinkding
