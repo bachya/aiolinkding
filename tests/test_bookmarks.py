@@ -1,4 +1,5 @@
 """Define tests for bookmark endpoints."""
+
 from typing import Any
 
 import aiohttp

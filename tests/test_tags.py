@@ -1,4 +1,5 @@
 """Define tests for tag endpoints."""
+
 from typing import Any
 
 import aiohttp
