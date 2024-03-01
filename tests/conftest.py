@@ -1,4 +1,5 @@
 """Define dynamic fixtures."""
+
 import json
 from collections.abc import Generator
 from typing import Any, cast

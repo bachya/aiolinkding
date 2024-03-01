@@ -1,4 +1,5 @@
 """Run a base example."""
+
 import asyncio
 import logging
 

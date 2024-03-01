@@ -1,4 +1,5 @@
 """Define an object to manage bookmark-based API requests."""
+
 from __future__ import annotations
 
 from collections.abc import Awaitable, Callable

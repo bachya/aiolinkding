@@ -1,4 +1,5 @@
 """Define tests for user endpoints."""
+
 from typing import Any
 
 import aiohttp

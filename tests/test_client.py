@@ -1,4 +1,5 @@
 """Define tests for the client."""
+
 from typing import Any
 
 import aiohttp
