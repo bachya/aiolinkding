@@ -62,7 +62,7 @@ classifiers = [
 aiohttp = ">=3.9.0"
 certifi = ">=2023.07.22"
 frozenlist = "^1.4.0"
-packaging = "^23.0"
+packaging = ">=23,<25"
 python = "^3.10"
 yarl = ">=1.9.2"
 
