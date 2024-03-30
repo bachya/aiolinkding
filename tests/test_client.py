@@ -1,10 +1,12 @@
 """Define tests for the client."""
 
+from __future__ import annotations
+
 from typing import Any
 
 import aiohttp
-import pytest
 from aresponses import ResponsesMockServer
+import pytest
 
 from aiolinkding import async_get_client
 from aiolinkding.client import (
@@ -20,14 +22,16 @@ from aiolinkding.errors import (
 from .common import TEST_TOKEN, TEST_URL
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_health_endpiont_missing(
     aresponses: ResponsesMockServer,
 ) -> None:
     """Test an API call when /health missing.
 
     Args:
+    ----
         aresponses: An aresponses server.
+
     """
     aresponses.add(
         "127.0.0.1:8000",
@@ -49,7 +53,7 @@ async def test_health_endpiont_missing(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 @pytest.mark.parametrize(
     "health_response",
     [
@@ -66,8 +70,10 @@ async def test_invalid_server_version(
     """Test an API call with an invalid server version.
 
     Args:
+    ----
         aresponses: An aresponses server.
         health_response: An API response payload.
+
     """
     aresponses.add(
         "127.0.0.1:8000",
@@ -87,7 +93,7 @@ async def test_invalid_server_version(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_invalid_token(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -96,9 +102,11 @@ async def test_invalid_token(
     """Test an API call with an invalid token.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         invalid_token_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -118,7 +126,7 @@ async def test_invalid_token(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_request_error(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -127,9 +135,11 @@ async def test_request_error(
     """Test an API call with a general request error.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         missing_field_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(

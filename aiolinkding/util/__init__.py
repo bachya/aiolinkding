@@ -9,10 +9,13 @@ def generate_api_payload(param_pairs: tuple) -> dict[str, Any]:
     """Generate an aiolinkding payload dict from parameters.
 
     Args:
+    ----
         param_pairs: A tuple of parameter key/values.
 
     Returns:
+    -------
         An API response payload.
+
     """
     payload = {}
 

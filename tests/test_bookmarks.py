@@ -1,17 +1,19 @@
 """Define tests for bookmark endpoints."""
 
+from __future__ import annotations
+
 from typing import Any
 
 import aiohttp
-import pytest
 from aresponses import ResponsesMockServer
+import pytest
 
 from aiolinkding import async_get_client
 
 from .common import TEST_TOKEN, TEST_URL
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_archive(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -19,8 +21,10 @@ async def test_archive(
     """Test archiving a bookmark.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -37,7 +41,7 @@ async def test_archive(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_create(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -46,9 +50,11 @@ async def test_create(
     """Test creating a single bookmark.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         bookmarks_async_get_single_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -76,7 +82,7 @@ async def test_create(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_delete(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -84,8 +90,10 @@ async def test_delete(
     """Test deleting a bookmark.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -102,7 +110,7 @@ async def test_delete(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_get_all(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -111,9 +119,11 @@ async def test_get_all(
     """Test getting all bookmarks.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         bookmarks_async_get_all_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -135,7 +145,7 @@ async def test_get_all(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_get_all_no_explicit_session(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -144,9 +154,11 @@ async def test_get_all_no_explicit_session(
     """Test getting all bookmarks without an explicit ClientSession.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         bookmarks_async_get_all_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -167,7 +179,7 @@ async def test_get_all_no_explicit_session(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_get_archived(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -176,9 +188,11 @@ async def test_get_archived(
     """Test getting archived bookmarks.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         bookmarks_async_get_archived_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -198,7 +212,7 @@ async def test_get_archived(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_get_single(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -207,9 +221,11 @@ async def test_get_single(
     """Test getting a single bookmark.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         bookmarks_async_get_single_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -229,7 +245,7 @@ async def test_get_single(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_unarchive(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -237,8 +253,10 @@ async def test_unarchive(
     """Test unarchiving a bookmark.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -255,7 +273,7 @@ async def test_unarchive(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_update(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -264,9 +282,11 @@ async def test_update(
     """Test creating a single bookmark.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         bookmarks_async_get_single_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(

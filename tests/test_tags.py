@@ -1,17 +1,19 @@
 """Define tests for tag endpoints."""
 
+from __future__ import annotations
+
 from typing import Any
 
 import aiohttp
-import pytest
 from aresponses import ResponsesMockServer
+import pytest
 
 from aiolinkding import async_get_client
 
 from .common import TEST_TOKEN, TEST_URL
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_create(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -20,9 +22,11 @@ async def test_create(
     """Test creating a single tag.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         tags_async_get_single_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -42,7 +46,7 @@ async def test_create(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_get_all(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -51,9 +55,11 @@ async def test_get_all(
     """Test getting all tags.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         tags_async_get_all_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(
@@ -75,7 +81,7 @@ async def test_get_all(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 async def test_get_single(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -84,9 +90,11 @@ async def test_get_single(
     """Test getting a single tag.
 
     Args:
+    ----
         aresponses: An aresponses server.
         authenticated_linkding_api_server: A mock authenticated linkding API server.
         tags_async_get_single_response: An API response payload.
+
     """
     async with authenticated_linkding_api_server:
         authenticated_linkding_api_server.add(

@@ -43,8 +43,8 @@ async def main() -> None:
 
             tags = await client.tags.async_get_all()
             _LOGGER.info("tags: %s", tags)
-        except LinkDingError as err:
-            _LOGGER.error("There was an error: %s", err)
+        except LinkDingError:
+            _LOGGER.exception("There was an error: %s")
 
 
 asyncio.run(main())

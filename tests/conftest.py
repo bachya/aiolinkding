@@ -1,12 +1,13 @@
 """Define dynamic fixtures."""
 
+from __future__ import annotations
+
 import json
-from collections.abc import Generator
 from typing import Any, cast
 
 import aiohttp
-import pytest
 from aresponses import ResponsesMockServer
+import pytest
 
 from aiolinkding.client import SERVER_VERSION_MINIMUM_REQUIRED
 from tests.common import load_fixture
@@ -15,11 +16,13 @@ from tests.common import load_fixture
 @pytest.fixture(name="authenticated_linkding_api_server")
 def authenticated_linkding_api_server_fixture(
     health_response: dict[str, Any],
-) -> Generator[ResponsesMockServer, None, None]:
+) -> ResponsesMockServer:
     """Return a fixture that mocks an authenticated linkding API server.
 
     Args:
+    ----
         health_response: An API response payload
+
     """
     server = ResponsesMockServer()
     server.add(
@@ -28,7 +31,7 @@ def authenticated_linkding_api_server_fixture(
         "get",
         response=aiohttp.web_response.json_response(health_response, status=200),
     )
-    yield server
+    return server
 
 
 @pytest.fixture(name="bookmarks_async_get_all_response", scope="session")
