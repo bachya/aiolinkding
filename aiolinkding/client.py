@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from http import HTTPStatus
 from typing import Any
 
 from aiohttp import ClientSession, ClientTimeout
@@ -39,9 +40,11 @@ class Client:  # pylint: disable=too-few-public-methods
         """Initialize.
 
         Args:
+        ----
             url: The full URL to a linkding instance.
             token: A linkding API token.
             session: An optional aiohttp ClientSession.
+
         """
         self._session = session
         self._token = token
@@ -57,17 +60,21 @@ class Client:  # pylint: disable=too-few-public-methods
         """Make an API request.
 
         Args:
+        ----
             method: An HTTP method.
             endpoint: A relative API endpoint.
             **kwargs: Additional kwargs to send with the request.
 
         Returns:
+        -------
             An API response payload.
 
         Raises:
+        ------
             InvalidTokenError: Raised upon an invalid API token.
             RequestError: Raised upon an underlying HTTP error.
             UnknownEndpointError: Raised when requesting an unknown API endpoint.
+
         """
         kwargs.setdefault("headers", {})
         kwargs["headers"]["Authorization"] = f"Token {self._token}"
@@ -88,18 +95,21 @@ class Client:  # pylint: disable=too-few-public-methods
                 data = await resp.json()
                 resp.raise_for_status()
         except ClientResponseError as err:
-            if resp.status == 204:
+            if resp.status == HTTPStatus.NO_CONTENT:
                 # An HTTP 204 will not return parsable JSON data, but it's still a
                 # successful response, so we swallow the exception and return:
                 return {}
-            if resp.status == 401:
-                raise InvalidTokenError("Invalid API token") from err
-            if resp.status == 404:
+            if resp.status == HTTPStatus.UNAUTHORIZED:
+                msg = "Invalid API token"
+                raise InvalidTokenError(msg) from err
+            if resp.status == HTTPStatus.NOT_FOUND:
                 # We break out this particular response for the health check; if we
                 # catch this when querying GET /health, we can raise a better final
-                # exception:
-                raise UnknownEndpointError(f"Unknown API endpoint: {endpoint}") from err
-            raise RequestError(f"Error while requesting {endpoint}: {data}") from err
+                # exception than what would normally occur:
+                msg = f"Unknown API endpoint: {endpoint}"
+                raise UnknownEndpointError(msg) from err
+            msg = f"Error while requesting {endpoint}: {data}"
+            raise RequestError(msg) from err
         finally:
             if not use_running_session:
                 await session.close()
@@ -115,15 +125,19 @@ async def async_get_client(
     """Get an authenticated, version-checked client.
 
     Args:
+    ----
         url: The full URL to a linkding instance.
         token: A linkding API token.
         session: An optional aiohttp ClientSession.
 
     Returns:
+    -------
         A Client object.
 
     Raises:
+    ------
         InvalidServerVersionError: Raised when the server version is too low.
+
     """
     client = Client(url, token, session=session)
 

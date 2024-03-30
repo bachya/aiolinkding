@@ -1,3 +1,8 @@
-"""Define the aiowatttime package."""
+"""Define the aiolinkding package."""
 
-from .client import Client, async_get_client  # noqa
+from .client import Client, async_get_client
+
+__all__ = [
+    "Client",
+    "async_get_client",
+]

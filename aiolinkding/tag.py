@@ -15,7 +15,9 @@ class TagManager:
         """Initialize.
 
         Args:
+        ----
             async_request: The request method from the Client object.
+
         """
         self._async_request = async_request
 
@@ -23,10 +25,13 @@ class TagManager:
         """Create a new tag.
 
         Args:
+        ----
             tag_name: The tag to create.
 
         Returns:
+        -------
             An API response payload.
+
         """
         data = await self._async_request(
             "post", "/api/tags/", json={"example": tag_name}
@@ -42,11 +47,14 @@ class TagManager:
         """Return all tags.
 
         Args:
+        ----
             limit: Limit the number of returned tags.
             offset: The index at which to return results.
 
         Returns:
+        -------
             An API response payload.
+
         """
         params = generate_api_payload(
             (
@@ -62,10 +70,13 @@ class TagManager:
         """Return a single tag.
 
         Args:
+        ----
             tag_id: The ID of the tag to get.
 
         Returns:
+        -------
             An API response payload.
+
         """
         data = await self._async_request("get", f"/api/tags/{tag_id}/")
         return cast(dict[str, Any], data)

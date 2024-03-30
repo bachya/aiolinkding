@@ -15,7 +15,9 @@ class BookmarkManager:
         """Initialize.
 
         Args:
+        ----
             async_request: The request method from the Client object.
+
         """
         self._async_request = async_request
 
@@ -30,13 +32,16 @@ class BookmarkManager:
         """Return all bookmarks.
 
         Args:
+        ----
             archived: Include archived bookmarks.
             query: Return bookmarks matching a query string.
             limit: Limit the number of returned bookmarks.
             offset: The index at which to return results.
 
         Returns:
+        -------
             An API response payload.
+
         """
         params = generate_api_payload(
             (
@@ -56,7 +61,9 @@ class BookmarkManager:
         """Archive a bookmark.
 
         Args:
+        ----
             bookmark_id: The ID of the bookmark to archive.
+
         """
         await self._async_request("post", f"/api/bookmarks/{bookmark_id}/archive/")
 
@@ -64,7 +71,9 @@ class BookmarkManager:
         """Delete a bookmark.
 
         Args:
+        ----
             bookmark_id: The ID of the bookmark to delete.
+
         """
         await self._async_request("delete", f"/api/bookmarks/{bookmark_id}/")
 
@@ -78,12 +87,15 @@ class BookmarkManager:
         """Return all bookmarks.
 
         Args:
+        ----
             query: Return bookmarks matching a query string.
             limit: Limit the number of returned bookmarks.
             offset: The index at which to return results.
 
         Returns:
+        -------
             An API response payload.
+
         """
         return await self._async_get_bookmarks(query=query, limit=limit, offset=offset)
 
@@ -97,18 +109,21 @@ class BookmarkManager:
         """Return all archived bookmarks.
 
         Args:
+        ----
             query: Return bookmarks matching a query string.
             limit: Limit the number of returned bookmarks.
             offset: The index at which to return results.
 
         Returns:
+        -------
             An API response payload.
+
         """
         return await self._async_get_bookmarks(
             archived=True, query=query, limit=limit, offset=offset
         )
 
-    async def async_create(  # pylint: disable=too-many-arguments
+    async def async_create(
         self,
         url: str,
         *,
@@ -123,6 +138,7 @@ class BookmarkManager:
         """Create a new bookmark.
 
         Args:
+        ----
             url: The bookmark URL.
             title: The bookmark title.
             description: The bookmark description.
@@ -133,7 +149,9 @@ class BookmarkManager:
             shared: Immediately mark the bookmark as shared.
 
         Returns:
+        -------
             An API response payload.
+
         """
         payload = generate_api_payload(
             (
@@ -154,10 +172,13 @@ class BookmarkManager:
         """Return a single bookmark.
 
         Args:
+        ----
             bookmark_id: The ID of the bookmark to get.
 
         Returns:
+        -------
             An API response payload.
+
         """
         return await self._async_request("get", f"/api/bookmarks/{bookmark_id}/")
 
@@ -165,11 +186,13 @@ class BookmarkManager:
         """Unarchive a bookmark.
 
         Args:
+        ----
             bookmark_id: The ID of the bookmark to unarchive.
+
         """
         await self._async_request("post", f"/api/bookmarks/{bookmark_id}/unarchive/")
 
-    async def async_update(  # pylint: disable=too-many-arguments
+    async def async_update(
         self,
         bookmark_id: int,
         *,
@@ -184,6 +207,7 @@ class BookmarkManager:
         """Update an existing bookmark.
 
         Args:
+        ----
             bookmark_id: The ID of the bookmark to update.
             url: The bookmark URL.
             title: The bookmark title.
@@ -194,7 +218,9 @@ class BookmarkManager:
             shared: Immediately mark the bookmark as shared.
 
         Returns:
+        -------
             An API response payload.
+
         """
         payload = generate_api_payload(
             (

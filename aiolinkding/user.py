@@ -13,15 +13,19 @@ class UserManager:  # pylint: disable=too-few-public-methods
         """Initialize.
 
         Args:
+        ----
             async_request: The request method from the Client object.
+
         """
         self._async_request = async_request
 
     async def async_get_profile(self) -> dict[str, Any]:
         """Return user profile info.
 
-        Returns:
+        Returns
+        -------
             An API response payload.
+
         """
         data = await self._async_request("get", "/api/user/profile/")
         return cast(dict[str, Any], data)
