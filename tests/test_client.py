@@ -22,7 +22,7 @@ from aiolinkding.errors import (
 from .common import TEST_TOKEN, TEST_URL
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_health_endpiont_missing(
     aresponses: ResponsesMockServer,
 ) -> None:
@@ -53,7 +53,7 @@ async def test_health_endpiont_missing(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 @pytest.mark.parametrize(
     "health_response",
     [
@@ -93,7 +93,7 @@ async def test_invalid_server_version(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_invalid_token(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -126,7 +126,7 @@ async def test_invalid_token(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_request_error(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,

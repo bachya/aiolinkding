@@ -13,7 +13,7 @@ from aiolinkding import async_get_client
 from .common import TEST_TOKEN, TEST_URL
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_create(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -46,7 +46,7 @@ async def test_create(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_get_all(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
@@ -81,7 +81,7 @@ async def test_get_all(
     aresponses.assert_plan_strictly_followed()
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_get_single(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
