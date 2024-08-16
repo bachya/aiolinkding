@@ -13,7 +13,7 @@ from aiolinkding import async_get_client
 from .common import TEST_TOKEN, TEST_URL
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_get_profile(
     aresponses: ResponsesMockServer,
     authenticated_linkding_api_server: ResponsesMockServer,
