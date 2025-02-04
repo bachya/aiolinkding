@@ -45,9 +45,9 @@ pip install aiolinkding
 
 `aiolinkding` is currently supported on:
 
-- Python 3.10
 - Python 3.11
 - Python 3.12
+- Python 3.13
 
 # Usage
 
