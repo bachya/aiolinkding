@@ -8,11 +8,6 @@ if [ "$(git rev-parse --abbrev-ref HEAD)" != "dev" ]; then
     exit 1
 fi
 
-if [ -z "$(command -v poetry)" ]; then
-    echo "Poetry needs to be installed to run this script: pip3 install poetry"
-    exit 1
-fi
-
 function generate_version {
     latest_tag="$(git tag --sort=committerdate | tail -1)"
     month="$(date +'%Y.%m')"
@@ -38,6 +33,10 @@ new_version=$(generate_version)
 # Update the PyPI package version:
 sed -i "" "s/^version = \".*\"/version = \"$new_version\"/g" "$REPO_PATH/pyproject.toml"
 git add pyproject.toml
+
+# Update the uv lockfile:
+uv lock
+git add uv.lock
 
 # Commit, tag, and push:
 git commit -m "Bump version to $new_version"
