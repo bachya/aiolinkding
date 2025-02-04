@@ -37,11 +37,6 @@ version = "2025.02.0"
 build = [
     "uv==0.5.26",
 ]
-docs = [
-    "Sphinx>=5,<9",
-    "myst-parser>=0.18,<4.1",
-    "sphinx-rtd-theme>=1,<4",
-]
 lint = [
     "blacken-docs==1.19.1",
     "codespell==2.4.0",
